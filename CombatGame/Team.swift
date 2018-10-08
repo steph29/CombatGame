@@ -8,14 +8,16 @@
 
 import Foundation
 
-class Team {
+class Team: Player{
     
-    var players: [Player] = []
-    var teamNameArray: [String]
+    var players: [Player]
+    var teamName: String
     
-    init(player: [Player], teamName: [String]){
+    init(player: [Player], teamName: String){
         self.players = player
-        self.teamNameArray = teamName
+        self.teamName = teamName
+        super.init(name: "", pointOfLife: 0)
+ 
     }
     
     // Ajout des joueurs dans le tableau d'une équipe
@@ -23,17 +25,5 @@ class Team {
         players.append(player)
     }
     
-    func CreateTeam() {
-        for i in 1 ... 2 {
-            print("Vous êtes l'équipe \(i) à jouer. Quelle est votre nom d'équipe?")
-            if let teamName = readLine(){
-                if !teamNameArray.contains(teamName){
-                    teamNameArray.append(teamName)
-                    print("Bienvenue \(teamName)")
-                }else{
-                    print("Ce nom d'équipe est déjà pris, veuillez en choisir un autre")}
-            }
-            Player.MakeYourTeam(name, type)
-        }
-}
+    
 }
