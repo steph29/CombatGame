@@ -11,6 +11,6 @@ import Foundation
 var game = Game()
 game.CreateGame()
 print(game.teamNameArray.count)
-print(game.teams)
-print(game)
+print(game.gameTeams)
+
 

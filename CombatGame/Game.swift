@@ -12,8 +12,9 @@ class Game {
     
     var teamNameArray: [String] = []
     var nameArray: [String] = []
-    var players = [Player]()
-    var teams: [String: String] = [:]
+    var gameTeams: [[String: String]] = []
+    var Team1: [String: String] = [:]
+    var Team2: [String: String] = [:]
     var combattant = Combattant()
     var colosse = Colosse()
     var mage = Mage()
@@ -25,27 +26,30 @@ class Game {
     
     
     func CreateGame() -> [String: String]{
-        var tabTeam: [String: String] = [:]
         for i in 1 ... 2 {
-            var newTeams: [String: String] = [:]
-             print("Vous êtes l'équipe\(i) à jouer. Quelle est votre nom d'équipe?")
-           CreateTeam()
+            print("Vous êtes l'équipe \(i) à jouer. Quelle est votre nom d'équipe?")
+            Team2 = CreateTeam()
+            if i == 1 {
+                 Team1 = Team2
+            }
+            gameTeams.append(Team2)
         }
-        return tabTeam
+            return Team2
     }
     
     func CreateTeam() -> [String: String] {
         
        // MARK - Identité de l'équipe
                 var teamName: String? = readLine()
-                if teamNameArray.contains(teamName!){
+                if teamNameArray.contains(teamName!) || teamName! == "" {
                 repeat{
-                    print("Ce nom d'équipe est déjà pris, veuillez en choisir un autre")
+                    print("Veuillez en choisir un autre nom d'équipe")
                     teamName = readLine()
                     } while (teamNameArray.contains(teamName!))
                 }
                 teamNameArray.append(teamName!)
                 print("Bienvenue \(teamName!)")
+                var newTeams: [String: String] = [:]
                
                 // MARK - Identité des personnages
                 for i in 1 ... 3 {
@@ -80,7 +84,7 @@ class Game {
                                     } while nameArray.contains(name!)
                                 }
                                         nameArray.append(name!)
-                                        teams.updateValue(Epee.init().name, forKey: name!)
+                                        newTeams.updateValue(Epee.init().name, forKey: name!)
                                         print("Voici \(name!), le combattants à \(combattant.pointOfLife) point de vie et possède une épee dont les dommages coûtent \(epee.damage) points")
                                
                             case "2":
@@ -93,8 +97,8 @@ class Game {
                                     } while nameArray.contains(name!)
                                 }
                                         nameArray.append(name!)
-                                        teams.updateValue(Sceptre.init().name, forKey: name!)
-                                        print("Voici \(name!), le mage à \(mage.pointOfLife) points de vie qui a le pouvoir de sauver vos personnages et possède un sceptre qui redonne \(abs(sceptre.damage)) points")
+                                        newTeams.updateValue(Sceptre.init().name, forKey: name!)
+                                        print("Voici \(name!), le mage à \(mage.pointOfLife) points de vie et a le pouvoir de sauver vos personnages grâce à son sceptre qui redonne \(abs(sceptre.damage)) points")
                               
                             case "3":
                                 print("Donnez lui un nom")
@@ -106,7 +110,7 @@ class Game {
                                     } while nameArray.contains(name!)
                                 }
                                         nameArray.append(name!)
-                                         teams.updateValue(Lance.init().name, forKey: name!)
+                                         newTeams.updateValue(Lance.init().name, forKey: name!)
                                         print("Voici \(name!), le colosse à \(colosse.pointOfLife) points de vie et possède une lance dont les dommages coûtent \(lance.damage) points")
                                 
                             case "4":
@@ -119,7 +123,7 @@ class Game {
                                     } while nameArray.contains(name!)
                                 }
                                         nameArray.append(name!)
-                                         teams.updateValue(Hache.init().name, forKey: name!)
+                                         newTeams.updateValue(Hache.init().name, forKey: name!)
                                         print("Voici \(name!), le nain à \(nain.pointOfLife) points de vie et possède une hache dont les dommages coûtent \(hache.damage) points")
                                
                             default:
@@ -127,7 +131,7 @@ class Game {
                                 } // fin du switch choice
                             } //fin du if var
                         } // fin de la boucle creation de 3 personages
-                    return teams
+                    return newTeams
                 }// fin du CreateTeam
     }// Fin de la class
 
