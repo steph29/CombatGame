@@ -9,21 +9,10 @@
 import Foundation
 
 class Team: Player{
+    var weapon: String
     
-    var players: [Player]
-    var teamName: String
-    
-    init(player: [Player], teamName: String){
-        self.players = player
-        self.teamName = teamName
+    init(name: String, weapon: String){
+        self.weapon = weapon
         super.init(name: "", pointOfLife: 0)
- 
     }
-    
-    // Ajout des joueurs dans le tableau d'une équipe
-    func add(player: Player){
-        players.append(player)
-    }
-    
-    
 }

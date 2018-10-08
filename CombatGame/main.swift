@@ -9,8 +9,8 @@
 import Foundation
 
 var game = Game()
-game.CreateTeam()
+game.CreateGame()
 print(game.teamNameArray.count)
 print(game.teams)
-
+print(game)
 

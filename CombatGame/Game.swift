@@ -24,11 +24,19 @@ class Game {
     var sceptre = Sceptre()
     
     
-    func CreateTeam() -> [String: String]{
-            for i in 1 ... 2 {
-                // Determine the team name for each gamer
-                print("Vous êtes l'équipe \(i) à jouer. Quelle est votre nom d'équipe?")
-               
+    func CreateGame() -> [String: String]{
+        var tabTeam: [String: String] = [:]
+        for i in 1 ... 2 {
+            var newTeams: [String: String] = [:]
+             print("Vous êtes l'équipe\(i) à jouer. Quelle est votre nom d'équipe?")
+           CreateTeam()
+        }
+        return tabTeam
+    }
+    
+    func CreateTeam() -> [String: String] {
+        
+       // MARK - Identité de l'équipe
                 var teamName: String? = readLine()
                 if teamNameArray.contains(teamName!){
                 repeat{
@@ -39,7 +47,7 @@ class Game {
                 teamNameArray.append(teamName!)
                 print("Bienvenue \(teamName!)")
                
-                // Determine the player in each team
+                // MARK - Identité des personnages
                 for i in 1 ... 3 {
                         if i == 1 {
                             print("Quel est votre premier personnage?")
@@ -72,7 +80,7 @@ class Game {
                                     } while nameArray.contains(name!)
                                 }
                                         nameArray.append(name!)
-                                    teams.updateValue(Epee.init().name, forKey: name!)
+                                        teams.updateValue(Epee.init().name, forKey: name!)
                                         print("Voici \(name!), le combattants à \(combattant.pointOfLife) point de vie et possède une épee dont les dommages coûtent \(epee.damage) points")
                                
                             case "2":
@@ -116,12 +124,10 @@ class Game {
                                
                             default:
                                 print("Choisissez bien parmi les personnages proposés !")
-                                } // fin du switch
-                            }
-                        }
-                
-                }// fin du if let choice
-        return teams
-    }
+                                } // fin du switch choice
+                            } //fin du if var
+                        } // fin de la boucle creation de 3 personages
+                    return teams
+                }// fin du CreateTeam
+    }// Fin de la class
 
-}
