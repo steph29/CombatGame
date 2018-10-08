@@ -8,7 +8,9 @@
 
 import Foundation
 
-class Game {
-
-}
+var game = Game()
+game.CreateGame()
+print(game.teamNameArray.count)
+print(game.teams)
+print(game)
 
