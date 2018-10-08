@@ -10,8 +10,10 @@ import Foundation
 
 class Game {
     
-    var teamNameArray: [String]
-    var nameArray: [String]
+    var teamNameArray: [String] = []
+    var nameArray: [String] = []
+    var players = [Player]()
+    var teams: [String: String] = [:]
     var combattant = Combattant()
     var colosse = Colosse()
     var mage = Mage()
@@ -22,16 +24,11 @@ class Game {
     var sceptre = Sceptre()
     
     
-    init(teamNameArray: [String], nameArray: [String]){
-        self.teamNameArray = teamNameArray
-        self.nameArray = nameArray
-    }
-
-    
-    func CreateTeam() {
+    func CreateTeam() -> [String: String]{
             for i in 1 ... 2 {
                 // Determine the team name for each gamer
                 print("Vous êtes l'équipe \(i) à jouer. Quelle est votre nom d'équipe?")
+               
                 var teamName: String? = readLine()
                 if teamNameArray.contains(teamName!){
                 repeat{
@@ -75,7 +72,9 @@ class Game {
                                     } while nameArray.contains(name!)
                                 }
                                         nameArray.append(name!)
-                                        print("Voici \(name!), le combattants à \(combattant.pointOfLife) point de vie et possède une \(epee) dont les dommages coûtent \(epee.damage) points")
+                                    teams.updateValue(Epee.init().name, forKey: name!)
+                                        print("Voici \(name!), le combattants à \(combattant.pointOfLife) point de vie et possède une épee dont les dommages coûtent \(epee.damage) points")
+                               
                             case "2":
                                 print("Donnez lui un nom")
                                 var name: String? = readLine()
@@ -86,7 +85,9 @@ class Game {
                                     } while nameArray.contains(name!)
                                 }
                                         nameArray.append(name!)
-                                        print("Voici \(name!), le mage à \(mage.pointOfLife) points de vie qui a le pouvoir de sauver vos personnages et possède une \(sceptre) qui redonne \(abs(sceptre.damage)) points")
+                                        teams.updateValue(Sceptre.init().name, forKey: name!)
+                                        print("Voici \(name!), le mage à \(mage.pointOfLife) points de vie qui a le pouvoir de sauver vos personnages et possède un sceptre qui redonne \(abs(sceptre.damage)) points")
+                              
                             case "3":
                                 print("Donnez lui un nom")
                                 var name: String? = readLine()
@@ -97,7 +98,9 @@ class Game {
                                     } while nameArray.contains(name!)
                                 }
                                         nameArray.append(name!)
-                                        print("Voici \(name!), le colosse à \(colosse.pointOfLife) points de vie et possède une \(lance) dont les dommages coûtent \(lance.damage) points")
+                                         teams.updateValue(Lance.init().name, forKey: name!)
+                                        print("Voici \(name!), le colosse à \(colosse.pointOfLife) points de vie et possède une lance dont les dommages coûtent \(lance.damage) points")
+                                
                             case "4":
                                 print("Donnez lui un nom")
                                 var name: String? = readLine()
@@ -108,13 +111,17 @@ class Game {
                                     } while nameArray.contains(name!)
                                 }
                                         nameArray.append(name!)
-                                        print("Voici \(name!), le nain à \(nain.pointOfLife) points de vie et possède une \(hache) dont les dommages coûtent \(hache.damage) points")
+                                         teams.updateValue(Hache.init().name, forKey: name!)
+                                        print("Voici \(name!), le nain à \(nain.pointOfLife) points de vie et possède une hache dont les dommages coûtent \(hache.damage) points")
+                               
                             default:
                                 print("Choisissez bien parmi les personnages proposés !")
                                 } // fin du switch
                             }
                         }
+                
                 }// fin du if let choice
-}
+        return teams
+    }
 
 }

@@ -8,9 +8,9 @@
 
 import Foundation
 
-var game = Game(teamNameArray: [], nameArray: [])
+var game = Game()
 game.CreateTeam()
 print(game.teamNameArray.count)
-print(game.teamNameArray[1])
-print(game.teamNameArray)
+print(game.teams)
+
 
