@@ -86,19 +86,35 @@
 				B15F2D7B215C115800074A70 /* main.swift */,
 				B1BDB99F2167E10200EB54B0 /* Game.swift */,
 				B15F2D84215EC68300074A70 /* Team.swift */,
+				B1BDB9B52170A4A900EB54B0 /* Player */,
+				B1BDB9B62170A4BB00EB54B0 /* Weapon */,
+			);
+			path = CombatGame;
+			sourceTree = "<group>";
+		};
+		B1BDB9B52170A4A900EB54B0 /* Player */ = {
+			isa = PBXGroup;
+			children = (
 				B15F2D82215EA58A00074A70 /* Player.swift */,
 				B1BDB99D21654EC700EB54B0 /* Character.swift */,
 				B1BDB9A92167F0B400EB54B0 /* Colosse.swift */,
 				B1BDB9AB2167F0BF00EB54B0 /* Mage.swift */,
 				B1BDB9AD2167F0CA00EB54B0 /* Nain.swift */,
 				B1BDB9AF2167F0D900EB54B0 /* Combattant.swift */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		B1BDB9B62170A4BB00EB54B0 /* Weapon */ = {
+			isa = PBXGroup;
+			children = (
 				B1BDB99B216549AC00EB54B0 /* Weapon.swift */,
 				B1BDB9A12167F08000EB54B0 /* Hache.swift */,
 				B1BDB9A32167F08D00EB54B0 /* Epee.swift */,
 				B1BDB9A52167F09900EB54B0 /* Lance.swift */,
 				B1BDB9A72167F0A800EB54B0 /* Sceptre.swift */,
 			);
-			path = CombatGame;
+			path = Weapon;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
