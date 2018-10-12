@@ -12,29 +12,12 @@ class Game {
     
     var teamNameArray: [String] = []
     var nameArray: [String] = []
-    var gameTeams: [[Player: Weapon]] = []
-    var Team1: [Player: Weapon] = [:]
-    var Team2: [Player: Weapon] = [:]
     var myTeam: [Any] = []
     var player = Player(name: "", pointOfLife: 0, weapon: Epee())
-    var combattant = Combattant()
-    var mage = Mage()
-    var nain = Nain()
-    var hache = Hache()
-    var epee = Epee()
-    var lance = Lance()
-    var sceptre = Sceptre()
-    var colosse = Colosse()
-   
+    var myTeam1: [Any] = []
+    var myTeam2: [Any] = []
     
-    
-    func TeamDisplay() {
-        print("Voici l'équipe adversaire: "
-        + "\n \(gameTeams[0])")
-        
-    }
-    
-    func ChoiceOppositePlayer() -> String {
+  func ChoiceOppositePlayer() -> String {
         print("Choisissez votre adversaire:")
         var opponent: String? = readLine()
         if opponent == ""{
@@ -47,38 +30,36 @@ class Game {
         return opponent!
     }
     
-    func CreateGame() -> [Player: Weapon]{
+    func CreateGame() -> [Any]{
         for i in 1 ... 2 {
             print("Vous êtes l'équipe \(i) à jouer. Quelle est votre nom d'équipe?")
-            Team2 = CreateTeam()
+            myTeam2 = CreateTeam()
             if i == 1 {
-                Team1 = Team2
+                myTeam1 = myTeam2
             }
-            gameTeams.append(Team2)
-            
+            myTeam.append(myTeam2)
         }
-            return Team2
+            return myTeam2
        
     }
     
-    
-    
-    func CreateTeam() -> [Player: Weapon] {
+   func CreateTeam() -> [Any]{
         
        // MARK - Identité de l'équipe
                 var teamName: String? = readLine()
-                if teamNameArray.contains(teamName!) || teamName! == "" {
+                var upperTeamName = teamName?.uppercased()
+                if teamNameArray.contains(upperTeamName!) || upperTeamName! == "" {
                 repeat{
                     print("Veuillez en choisir un autre nom d'équipe")
                     teamName = readLine()
-                    } while (teamNameArray.contains(teamName!))
+                    upperTeamName = teamName!.uppercased()
+                    } while (teamNameArray.contains(upperTeamName!) || upperTeamName! == "")
                 }
-                teamNameArray.append(teamName!)
+                teamNameArray.append(upperTeamName!)
                 print("Bienvenue \(teamName!)")
-                var newTeams: [Player: Weapon] = [:]
+                var myTeam: [Any] = []
     
-               
-                // MARK - Identité des personnages
+        // MARK - Identité des personnages
                 for i in 1 ... 3 {
                         if i == 1 {
                             print("Quel est votre premier personnage?")
@@ -102,106 +83,96 @@ class Game {
                             }
                             switch choice {
                             case "1":
-                                var pedigreDuCombattant: [Any] = []
                                 print("Donnez lui un nom")
                                 var name: String? = readLine()
-                                if nameArray.contains(name!) || name! == "" {
+                                var upperName = name?.uppercased()
+                                if nameArray.contains(upperName!) || upperName! == "" {
                                     repeat{
                                         print("Veuillez en donner un autre nom")
                                         name = readLine()
-                                    } while nameArray.contains(name!)
+                                        upperName = name!.uppercased()
+                                    } while (nameArray.contains(upperName!) || upperName! == "")
                                 }
-                                        nameArray.append(name!)
-                                        combattant.name = name!
-                                        newTeams.updateValue(game.epee, forKey: game.combattant)
-                                        pedigreDuCombattant.append(combattant.name)
-                                        pedigreDuCombattant.append(combattant.pointOfLife)
-                                        pedigreDuCombattant.append(combattant.weapon.name)
-                                        pedigreDuCombattant.append(combattant.weapon.damage)
-                                        print("Voici \(name!), le combattants à \(combattant.pointOfLife) point de vie et possède une \(epee.name) dont les dommages coûtent \(epee.damage) points")
-                                      print(pedigreDuCombattant)
-                                        myTeam.append(pedigreDuCombattant)
+                                nameArray.append(upperName!)
+                                let combattant = Combattant(name: name!)
+                                let epee = Epee()
+                                print("Voici \(name!), le combattants à \(combattant.pointOfLife) point de vie et possède une \(epee.name) dont les dommages coûtent \(epee.damage) points")
+                                myTeam.append(combattant)
                                
                             case "2":
-                               var pedigreDuMage: [Any] = []
                                 print("Donnez lui un nom")
                                 var name: String? = readLine()
-                                if nameArray.contains(name!) || name! == "" {
+                                var upperName = name?.uppercased()
+                                if nameArray.contains(upperName!) || upperName! == "" {
                                     repeat{
                                         print("Veuillez en donner un autre nom")
                                         name = readLine()
-                                    } while nameArray.contains(name!)
+                                        upperName = name!.uppercased()
+                                    } while (nameArray.contains(upperName!) || upperName! == "")
                                 }
-                                        nameArray.append(name!)
-                                         mage.name = name! 
-                                        newTeams.updateValue(sceptre, forKey: mage)
-                                pedigreDuMage.append(mage.name)
-                                pedigreDuMage.append(mage.pointOfLife)
-                                pedigreDuMage.append(mage.weapon.name)
-                                pedigreDuMage.append(mage.weapon.damage)
-                                        print("Voici \(name!), le mage à \(mage.pointOfLife) points de vie et a le pouvoir de sauver vos personnages grâce à son \(sceptre.name) qui redonne \(abs(sceptre.damage)) points")
-                                        print(pedigreDuMage)
-                                myTeam.append(pedigreDuMage)
+                                nameArray.append(upperName!)
+                                let mage = Mage(name: name!)
+                                let sceptre = Sceptre()
+                                print("Voici \(name!), le mage à \(mage.pointOfLife) points de vie et a le pouvoir de sauver vos personnages grâce à son \(sceptre.name) qui redonne \(abs(sceptre.damage)) points")
+                                myTeam.append(mage)
                               
                             case "3":
-                                var pedigreDuColosse: [Any] = []
                                 print("Donnez lui un nom")
                                 var name: String? = readLine()
-                                if nameArray.contains(name!) || name! == "" {
+                                var upperName = name?.uppercased()
+                                if nameArray.contains(upperName!) || upperName! == "" {
                                     repeat{
                                         print("Veuillez en donner un autre nom")
                                         name = readLine()
-                                    } while nameArray.contains(name!)
+                                        upperName = name!.uppercased()
+                                    } while (nameArray.contains(upperName!) || upperName! == "")
                                 }
-                                        nameArray.append(name!)
-                                        colosse.name = name!
-                                         newTeams.updateValue(lance, forKey: colosse)
-                                        pedigreDuColosse.append(colosse.name)
-                                        pedigreDuColosse.append(colosse.pointOfLife)
-                                        pedigreDuColosse.append(colosse.weapon.name)
-                                        pedigreDuColosse.append(colosse.weapon.damage)
-                                        print("Voici \(name!), le colosse à \(colosse.pointOfLife) points de vie et possède une \(lance.name) dont les dommages coûtent \(lance.damage) points")
-                                        print(pedigreDuColosse)
-                                        myTeam.append(pedigreDuColosse)
+                                nameArray.append(upperName!)
+                                let colosse = Colosse(name: name!)
+                                let lance = Lance()
+                                print("Voici \(name!), le colosse à \(colosse.pointOfLife) points de vie et possède une \(lance.name) dont les dommages coûtent \(lance.damage) points")
+                                myTeam.append(colosse)
+                                
                             case "4":
-                                var pedigreDuNain: [Any] = []
                                 print("Donnez lui un nom")
                                 var name: String? = readLine()
-                                if nameArray.contains(name!) || name! == "" {
+                                var upperName = name?.uppercased()
+                                if nameArray.contains(upperName!) || upperName! == "" {
                                     repeat{
                                         print("Veuillez en donner un autre nom")
                                         name = readLine()
-                                    } while nameArray.contains(name!)
+                                        upperName = name!.uppercased()
+                                    } while (nameArray.contains(upperName!) || upperName! == "")
                                 }
-                                        nameArray.append(name!)
-                                        nain.name = name!
-                                         newTeams.updateValue(hache, forKey: nain)
-                                        pedigreDuNain.append(nain.name)
-                                        pedigreDuNain.append(nain.pointOfLife)
-                                        pedigreDuNain.append(nain.weapon.name)
-                                        pedigreDuNain.append(nain.weapon.damage)
-                                        print("Voici \(name!), le nain à \(nain.pointOfLife) points de vie et possède une \(hache.name) dont les dommages coûtent \(hache.damage) points")
-                                        print(pedigreDuNain)
-                                        myTeam.append(pedigreDuNain)
+                                nameArray.append(upperName!)
+                                let nain = Nain(name: name!)
+                                let hache = Hache()
+                                print("Voici \(name!), le nain à \(nain.pointOfLife) points de vie et possède une \(hache.name) dont les dommages coûtent \(hache.damage) points")
+                                myTeam.append(nain)
+                           
                             default:
                                 print("Choisissez bien parmi les personnages proposés !")
                                 } // fin du switch choice
                             } //fin du if var
                         } // fin de la boucle creation de 3 personages
-                    return newTeams
+                    return myTeam
                 }// fin du CreateTeam
     
     func Resurrect(player: Player) -> Int {
+         let sceptre = Sceptre()
         player.pointOfLife = player.pointOfLife + sceptre.damage
         print ("Vous venez de recupérer \(sceptre.damage). Vous avez désormais \(player.pointOfLife) de points de vie.")
-        return game.player.pointOfLife
+        return player.pointOfLife
     }
     
     func Hit(player: Player, weapon: Weapon) -> Int {
+        let lance = Lance()
+        let hache = Hache()
+         let epee = Epee()
         if weapon.name == "hache" {
             player.pointOfLife = player.pointOfLife - hache.damage
             print("Vous venez de perdre \(hache.damage). Vous avez désormais \(player.pointOfLife) de points de vie.")
-            if IsDead(){
+            if IsDead(player: player){
                 print("Votre personnage est malheureusement décédé des suites de ses plessures!")
             }else{
                 print("Ne vous laissez abattre ! Votre tour arrive")
@@ -210,7 +181,7 @@ class Game {
         }else if weapon.name == "lance" {
            player.pointOfLife = player.pointOfLife - lance.damage
             print("Vous venez de perdre \(lance.damage). Vous avez désormais \(player.pointOfLife) de points de vie.")
-            if IsDead(){
+            if IsDead(player: player){
                 print("Votre personnage est malheureusement décédé des suites de ses plessures!")
             }else{
                 print("Ne vous laissez abattre ! Votre tour arrive")
@@ -219,7 +190,7 @@ class Game {
         }else{
             player.pointOfLife = player.pointOfLife - epee.damage
             print("Vous venez de perdre \(epee.damage). Vous avez désormais \(player.pointOfLife) de points de vie.")
-            if IsDead(){
+            if IsDead(player: player){
                 print("Votre personnage est malheureusement décédé des suites de ses plessures!")
             }else{
                 print("Ne vous laissez abattre ! Votre tour arrive")
@@ -229,9 +200,9 @@ class Game {
     }
     
     
-    func IsDead() -> Bool  {
+    func IsDead(player: Player) -> Bool  {
         var isDead = false
-        if game.player.pointOfLife <= 0 {
+        if player.pointOfLife <= 0 {
             isDead = true
         }
         return isDead

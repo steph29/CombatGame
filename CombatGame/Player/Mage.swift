@@ -9,7 +9,7 @@
 import Foundation
 
 class Mage: Player {
-    init() {
-        super.init(name: "", pointOfLife: 80, weapon: Sceptre())
+    init(name: String) {
+        super.init(name: name, pointOfLife: 80, weapon: Sceptre())
     }
 }

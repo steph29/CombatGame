@@ -9,21 +9,10 @@
 import Foundation
 
 var game = Game()
-var mage = Mage()
-var nain = Nain()
-var hache = Hache()
-var epee = Epee()
-var lance = Lance()
-var sceptre = Sceptre()
-var colosse = Colosse()
-
-
-
+var mage = Mage(name: "")
 game.CreateGame()
 print(game.myTeam)
-print(game.myTeam[0])
-var myPlayer = game.myTeam[0]
-print(myPlayer)
-print(game.mage.name, game.mage.pointOfLife, game.mage.weapon.name, game.mage.weapon.damage)
+print(game.myTeam1[2])
+var play = game.myTeam2[2]
 
 

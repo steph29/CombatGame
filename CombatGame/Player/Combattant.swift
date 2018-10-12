@@ -10,7 +10,7 @@ import Foundation
 
 class Combattant: Player {
 
-    init() {
-        super.init(name: "", pointOfLife: 100, weapon: Epee())
+    init(name: String) {
+        super.init(name: name, pointOfLife: 100, weapon: Epee())
     }
 }
