@@ -1,5 +1,5 @@
 //
-//  Colosse.swift
+//  Lance.swift
 //  CombatGame
 //
 //  Created by stephane verardo on 05/10/2018.
@@ -8,9 +8,8 @@
 
 import Foundation
 
-class Colosse: Player {
-    
+class Lance: Weapon {
     init() {
-        super.init(name: "Colosse", pointOfLife: 100)
+        super.init(damage: 20, name: "lance")
     }
 }

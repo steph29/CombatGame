@@ -1,5 +1,5 @@
 //
-//  Hache.swift
+//  Sceptre.swift
 //  CombatGame
 //
 //  Created by stephane verardo on 05/10/2018.
@@ -8,10 +8,8 @@
 
 import Foundation
 
-class Hache: Weapon {
-
+class Sceptre: Weapon {
     init() {
-       super.init(damage: 15, name: "Hache")
+        super.init(damage: 10, name: "sceptre")
     }
-    
 }

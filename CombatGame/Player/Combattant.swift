@@ -11,6 +11,6 @@ import Foundation
 class Combattant: Player {
 
     init() {
-        super.init(name: "Combattant", pointOfLife: 120)
+        super.init(name: "Combattant", pointOfLife: 100)
     }
 }

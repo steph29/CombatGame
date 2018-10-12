@@ -1,5 +1,5 @@
 //
-//  Sceptre.swift
+//  Colosse.swift
 //  CombatGame
 //
 //  Created by stephane verardo on 05/10/2018.
@@ -8,8 +8,9 @@
 
 import Foundation
 
-class Sceptre: Weapon {
+class Colosse: Player {
+    
     init() {
-        super.init(damage: -10, name: "Sceptre")
+        super.init(name: "Colosse", pointOfLife: 120)
     }
 }
