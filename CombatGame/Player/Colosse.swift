@@ -9,8 +9,10 @@
 import Foundation
 
 class Colosse: Player {
+ 
     
+   
     init() {
-        super.init(name: "Colosse", pointOfLife: 120)
+        super.init(name: "", pointOfLife: 120, weapon: Lance())
     }
 }

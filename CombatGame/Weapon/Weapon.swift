@@ -8,10 +8,6 @@
 
 import Foundation
 
-enum WeaponType {
-    case Epee, Hache, Sceptre, Lance
-}
-
 class Weapon {
     var damage: Int
     var name: String

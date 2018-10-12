@@ -11,6 +11,6 @@ import Foundation
 class Nain: Player {
  
     init() {
-        super.init(name: "Nain", pointOfLife: 60)
+        super.init(name: "", pointOfLife: 60, weapon: Hache())
     }
 }

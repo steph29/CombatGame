@@ -11,11 +11,13 @@ import Foundation
 class Player: Hashable {
     var name: String
     var pointOfLife: Int
+    var weapon: Weapon
+    
     var epee = Epee()
     var lance = Lance()
     var hache = Hache()
     var sceptre = Sceptre()
-    var weapon = Weapon(damage: 0, name: "")
+  
 
     public var hashValue: Int{
         return name.hashValue
@@ -25,23 +27,26 @@ class Player: Hashable {
         return lhs.name == rhs.name
     }
     
-    init(name: String, pointOfLife: Int){
+    init(name: String, pointOfLife: Int, weapon: Weapon){
         self.name = name
         self.pointOfLife = pointOfLife
+        self.weapon = weapon
      }
+    
+    
     
     func IsDead() -> Bool  {
        var isDead = false
-        if pointOfLife == 0 {
+        if pointOfLife <= 0 {
              isDead = true
         }
        return isDead
     }
     
-    func Resurrect() -> Int {
+    func Resurrect() -> String {
         pointOfLife = pointOfLife + sceptre.damage
-        print("Vous venez de recupérer \(sceptre.damage). Vous avez désormais \(pointOfLife) de points de vie.")
-        return pointOfLife
+                return ("Vous venez de recupérer \(sceptre.damage). Vous avez désormais \(pointOfLife) de points de vie.")
+
     }
     
     func Hit(weapon: Weapon) -> Int {
