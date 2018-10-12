@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+ /*
 class Team: Player{
     var weapon: String
     
@@ -16,3 +16,4 @@ class Team: Player{
         super.init(name: "", pointOfLife: 0)
     }
 }
+*/

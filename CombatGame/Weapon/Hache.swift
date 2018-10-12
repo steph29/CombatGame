@@ -1,5 +1,5 @@
 //
-//  Lance.swift
+//  Hache.swift
 //  CombatGame
 //
 //  Created by stephane verardo on 05/10/2018.
@@ -8,8 +8,10 @@
 
 import Foundation
 
-class Lance: Weapon {
+class Hache: Weapon {
+
     init() {
-        super.init(damage: 20, name: "Lance")
+       super.init(damage: 15, name: "hache")
     }
+    
 }
