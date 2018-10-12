@@ -15,6 +15,7 @@ class Game {
     var gameTeams: [[Player: Weapon]] = []
     var Team1: [Player: Weapon] = [:]
     var Team2: [Player: Weapon] = [:]
+    var myTeam: [Any] = []
     var player = Player(name: "", pointOfLife: 0, weapon: Epee())
     var combattant = Combattant()
     var mage = Mage()
@@ -101,6 +102,7 @@ class Game {
                             }
                             switch choice {
                             case "1":
+                                var pedigreDuCombattant: [Any] = []
                                 print("Donnez lui un nom")
                                 var name: String? = readLine()
                                 if nameArray.contains(name!) || name! == "" {
@@ -111,11 +113,17 @@ class Game {
                                 }
                                         nameArray.append(name!)
                                         combattant.name = name!
-                                        newTeams.updateValue(epee, forKey: combattant)
+                                        newTeams.updateValue(game.epee, forKey: game.combattant)
+                                        pedigreDuCombattant.append(combattant.name)
+                                        pedigreDuCombattant.append(combattant.pointOfLife)
+                                        pedigreDuCombattant.append(combattant.weapon.name)
+                                        pedigreDuCombattant.append(combattant.weapon.damage)
                                         print("Voici \(name!), le combattants à \(combattant.pointOfLife) point de vie et possède une \(epee.name) dont les dommages coûtent \(epee.damage) points")
-                                      
+                                      print(pedigreDuCombattant)
+                                        myTeam.append(pedigreDuCombattant)
                                
                             case "2":
+                               var pedigreDuMage: [Any] = []
                                 print("Donnez lui un nom")
                                 var name: String? = readLine()
                                 if nameArray.contains(name!) || name! == "" {
@@ -127,10 +135,16 @@ class Game {
                                         nameArray.append(name!)
                                          mage.name = name! 
                                         newTeams.updateValue(sceptre, forKey: mage)
+                                pedigreDuMage.append(mage.name)
+                                pedigreDuMage.append(mage.pointOfLife)
+                                pedigreDuMage.append(mage.weapon.name)
+                                pedigreDuMage.append(mage.weapon.damage)
                                         print("Voici \(name!), le mage à \(mage.pointOfLife) points de vie et a le pouvoir de sauver vos personnages grâce à son \(sceptre.name) qui redonne \(abs(sceptre.damage)) points")
-                                        print(mage.name)
+                                        print(pedigreDuMage)
+                                myTeam.append(pedigreDuMage)
                               
                             case "3":
+                                var pedigreDuColosse: [Any] = []
                                 print("Donnez lui un nom")
                                 var name: String? = readLine()
                                 if nameArray.contains(name!) || name! == "" {
@@ -142,9 +156,15 @@ class Game {
                                         nameArray.append(name!)
                                         colosse.name = name!
                                          newTeams.updateValue(lance, forKey: colosse)
+                                        pedigreDuColosse.append(colosse.name)
+                                        pedigreDuColosse.append(colosse.pointOfLife)
+                                        pedigreDuColosse.append(colosse.weapon.name)
+                                        pedigreDuColosse.append(colosse.weapon.damage)
                                         print("Voici \(name!), le colosse à \(colosse.pointOfLife) points de vie et possède une \(lance.name) dont les dommages coûtent \(lance.damage) points")
-                                
+                                        print(pedigreDuColosse)
+                                        myTeam.append(pedigreDuColosse)
                             case "4":
+                                var pedigreDuNain: [Any] = []
                                 print("Donnez lui un nom")
                                 var name: String? = readLine()
                                 if nameArray.contains(name!) || name! == "" {
@@ -156,8 +176,13 @@ class Game {
                                         nameArray.append(name!)
                                         nain.name = name!
                                          newTeams.updateValue(hache, forKey: nain)
+                                        pedigreDuNain.append(nain.name)
+                                        pedigreDuNain.append(nain.pointOfLife)
+                                        pedigreDuNain.append(nain.weapon.name)
+                                        pedigreDuNain.append(nain.weapon.damage)
                                         print("Voici \(name!), le nain à \(nain.pointOfLife) points de vie et possède une \(hache.name) dont les dommages coûtent \(hache.damage) points")
-                               
+                                        print(pedigreDuNain)
+                                        myTeam.append(pedigreDuNain)
                             default:
                                 print("Choisissez bien parmi les personnages proposés !")
                                 } // fin du switch choice

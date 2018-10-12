@@ -20,12 +20,10 @@ var colosse = Colosse()
 
 
 game.CreateGame()
-print(game.gameTeams)
-print(game.gameTeams[0])
-print(game.TeamDisplay())
+print(game.myTeam)
+print(game.myTeam[0])
+var myPlayer = game.myTeam[0]
+print(myPlayer)
 print(game.mage.name, game.mage.pointOfLife, game.mage.weapon.name, game.mage.weapon.damage)
-print(game.colosse.name)
-print(game.nain.weapon.name)
-print(game.combattant.weapon.damage)
 
 
