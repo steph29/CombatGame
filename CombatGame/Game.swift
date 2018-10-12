@@ -15,6 +15,7 @@ class Game {
     var gameTeams: [[Player: Weapon]] = []
     var Team1: [Player: Weapon] = [:]
     var Team2: [Player: Weapon] = [:]
+    var player = Player(name: "", pointOfLife: 0, weapon: Epee())
     var combattant = Combattant()
     var mage = Mage()
     var nain = Nain()
@@ -23,6 +24,7 @@ class Game {
     var lance = Lance()
     var sceptre = Sceptre()
     var colosse = Colosse()
+   
     
     
     func TeamDisplay() {
@@ -163,5 +165,51 @@ class Game {
                         } // fin de la boucle creation de 3 personages
                     return newTeams
                 }// fin du CreateTeam
+    
+    func Resurrect(player: Player) -> Int {
+        player.pointOfLife = player.pointOfLife + sceptre.damage
+        print ("Vous venez de recupérer \(sceptre.damage). Vous avez désormais \(player.pointOfLife) de points de vie.")
+        return game.player.pointOfLife
+    }
+    
+    func Hit(player: Player, weapon: Weapon) -> Int {
+        if weapon.name == "hache" {
+            player.pointOfLife = player.pointOfLife - hache.damage
+            print("Vous venez de perdre \(hache.damage). Vous avez désormais \(player.pointOfLife) de points de vie.")
+            if IsDead(){
+                print("Votre personnage est malheureusement décédé des suites de ses plessures!")
+            }else{
+                print("Ne vous laissez abattre ! Votre tour arrive")
+            }
+            return player.pointOfLife
+        }else if weapon.name == "lance" {
+           player.pointOfLife = player.pointOfLife - lance.damage
+            print("Vous venez de perdre \(lance.damage). Vous avez désormais \(player.pointOfLife) de points de vie.")
+            if IsDead(){
+                print("Votre personnage est malheureusement décédé des suites de ses plessures!")
+            }else{
+                print("Ne vous laissez abattre ! Votre tour arrive")
+            }
+            return player.pointOfLife
+        }else{
+            player.pointOfLife = player.pointOfLife - epee.damage
+            print("Vous venez de perdre \(epee.damage). Vous avez désormais \(player.pointOfLife) de points de vie.")
+            if IsDead(){
+                print("Votre personnage est malheureusement décédé des suites de ses plessures!")
+            }else{
+                print("Ne vous laissez abattre ! Votre tour arrive")
+            }
+            return player.pointOfLife
+        }
+    }
+    
+    
+    func IsDead() -> Bool  {
+        var isDead = false
+        if game.player.pointOfLife <= 0 {
+            isDead = true
+        }
+        return isDead
+    }
     }// Fin de la class
 
