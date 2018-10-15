@@ -13,7 +13,8 @@ class Game {
     var teamNameArray: [String] = []
     var nameArray: [String] = []
     var myTeam: [[Player]] = []
-    var player = Player(name: "", pointOfLife: 0, weapon: Epee())
+    var frPlayer = Player(name: "", pointOfLife: 0, weapon: Epee())
+    var opPlayer = Player(name: "", pointOfLife: 0, weapon: Epee())
     var myTeam1: [Player] = []
     var myTeam2: [Player] = []
     
@@ -152,11 +153,108 @@ class Game {
                     return myTeam
                 }// fin du CreateTeam
     
-    func affichage() -> String {
-       return colosse.name
+    func ChoiceFriendlyPlayer() -> Player {
+        // Le mag ene peut pas combattre
+         print(     "1. \(myTeam1[0].name) équipé de \(myTeam1[0].weapon.name) et a \(myTeam2[0].pointOfLife) points de vie"
+                + "\n2. \(myTeam1[1].name) équipé de \(myTeam1[1].weapon.name) et a \(myTeam1[1].pointOfLife) points de vie"
+                + "\n3. \(myTeam1[2].name) équipé de \(myTeam1[2].weapon.name) et a \(myTeam1[2].pointOfLife) points de vie")
+        var friendlyPlayer: String? = readLine()
+        if !(friendlyPlayer == "1" || friendlyPlayer == "2" || friendlyPlayer == "3" || friendlyPlayer == ""){
+            repeat{
+                print("Veuillez choisir un de vos joueurs")
+                friendlyPlayer = readLine()
+            }while(!(friendlyPlayer == "1" || friendlyPlayer == "2" || friendlyPlayer == "3" || friendlyPlayer == ""))
+        }else {
+            
+                switch friendlyPlayer {
+                case "1":
+                    frPlayer = myTeam1[0]
+                case "2":
+                    frPlayer = myTeam1[1]
+                case "3":
+                    frPlayer = myTeam1[2]
+                default:
+                    break
+                }
+            }
+        return frPlayer
+        }
+    
+    
+        func ChoiceOppositePlayer() -> Player{
+        print(    "\n1. \(myTeam2[0].name) équipé de \(myTeam2[0].weapon.name) et a \(myTeam2[0].pointOfLife) points de vie"
+                + "\n2. \(myTeam2[1].name) équipé de \(myTeam2[1].weapon.name) et a \(myTeam2[1].pointOfLife) points de vie"
+                + "\n3. \(myTeam2[2].name) équipé de \(myTeam2[2].weapon.name) et a \(myTeam2[2].pointOfLife) points de vie")
+        var opponent: String? = readLine()
+        if !(opponent == "1" || opponent == "2" || opponent == "3" || opponent == ""){
+            repeat{
+            print("Veuillez choisir un adversaire")
+            opponent = readLine()
+            } while(!(opponent == "1" || opponent == "2" || opponent == "3" || opponent == ""))
+            }else {
+            
+                switch opponent {
+                case "1":
+                     opPlayer = myTeam2[0]
+                case "2":
+                    opPlayer = myTeam2[1]
+                case "3":
+                    opPlayer = myTeam2[2]
+                default:
+                    break
+                    }
+                }
+            return opPlayer
+            }
+
+    func CombatGame() {
+            var pointOfLiveTeam1 = myTeam1[0].pointOfLife + myTeam1[1].pointOfLife + myTeam1[2].pointOfLife
+            var pointOfLiveTeam2 = myTeam2[0].pointOfLife + myTeam2[1].pointOfLife + myTeam2[2].pointOfLife
+        if !(pointOfLiveTeam1 == 0 || pointOfLiveTeam2 == 0){
+        repeat{
+            for i in 1...2 {
+             print("\(teamNameArray[i-1]), Voulez-vous attaquer ou soigner?"
+            + "\n1. Attaquer"
+            + "\n2. Soigner")
+            
+            var choice: String? = readLine()
+                if !(choice == "1" || choice == "2"){
+                    repeat{
+                        print("Veuillez faire un choix")
+                        choice = readLine()
+                        } while(!(choice == "1" || choice == "2" ))
+                    }
+                else{
+                    if i == 1 {
+                        if choice == "1"{
+                            print("Choisissez votre personnage:")
+                            ChoiceFriendlyPlayer()
+                            print("Voici vos adversaire:")
+                            ChoiceOppositePlayer()
+                            print("Le combat commence!")
+                            print(Hit(player: opPlayer, weapon: frPlayer.weapon))
+                        }else{
+                            ChoiceFriendlyPlayer()
+                            Resurrect(player: frPlayer)
+                                }
+                    }else{
+                        if choice == "1"{
+                            print("Choisissez votre personnage:")
+                            ChoiceOppositePlayer()
+                            print("Voici vos adversaire:")
+                            ChoiceFriendlyPlayer()
+                            print("Le combat commence!")
+                            print(Hit(player: frPlayer , weapon: opPlayer.weapon))
+                        }else{
+                            ChoiceFriendlyPlayer()
+                            Resurrect(player: opPlayer)
+                                }
+                            }
+                        }
+                }
+            }while (!(pointOfLiveTeam1 == 0 || pointOfLiveTeam2 == 0))
+        }
     }
-    
-    
     
     
     func Resurrect(player: Player) -> Int {
@@ -166,37 +264,37 @@ class Game {
         return player.pointOfLife
     }
     
-    func Hit(player: Player, weapon: Weapon) -> Int {
-        let lance = Lance()
-        let hache = Hache()
-         let epee = Epee()
+
+    
+    func Hit(player: Player, weapon: Weapon) {
         if weapon.name == "hache" {
+            var hache = Hache()
             player.pointOfLife = player.pointOfLife - hache.damage
-            print("Vous venez de perdre \(hache.damage). Vous avez désormais \(player.pointOfLife) de points de vie.")
+            print("Votre adversaire vient de perdre \(hache.damage). Il lui reste donc désormais \(player.pointOfLife) de points de vie.")
             if IsDead(player: player){
-                print("Votre personnage est malheureusement décédé des suites de ses plessures!")
+                print("Félicitation, vous venez d'éliminer un adversaire!")
             }else{
-                print("Ne vous laissez abattre ! Votre tour arrive")
+                print("Son tour viendra! ")
             }
-            return player.pointOfLife
+         
         }else if weapon.name == "lance" {
+            var lance = Lance()
            player.pointOfLife = player.pointOfLife - lance.damage
-            print("Vous venez de perdre \(lance.damage). Vous avez désormais \(player.pointOfLife) de points de vie.")
+            print("Votre adversaire vient de perdre \(lance.damage). Il lui reste donc désormais \(player.pointOfLife) de points de vie.")
             if IsDead(player: player){
-                print("Votre personnage est malheureusement décédé des suites de ses plessures!")
+                print("Félicitation, vous venez d'éliminer un adversaire!")
             }else{
-                print("Ne vous laissez abattre ! Votre tour arrive")
+                print("Son tour viendra! ")
             }
-            return player.pointOfLife
-        }else{
+        }else if weapon.name == "epee" {
+            var epee = Epee()
             player.pointOfLife = player.pointOfLife - epee.damage
-            print("Vous venez de perdre \(epee.damage). Vous avez désormais \(player.pointOfLife) de points de vie.")
+            print("Votre adversaire vient de perdre \(epee.damage). Il lui reste donc désormais \(player.pointOfLife) de points de vie.")
             if IsDead(player: player){
-                print("Votre personnage est malheureusement décédé des suites de ses plessures!")
+                print("Félicitation, vous venez d'éliminer un adversaire!")
             }else{
-                print("Ne vous laissez abattre ! Votre tour arrive")
+                print("Son tour viendra! ")
             }
-            return player.pointOfLife
         }
     }
     

@@ -13,8 +13,7 @@ var mage = Mage(name: "")
 var nain = Nain(name: "")
 var colosse = Colosse(name: "")
 game.CreateGame()
-print(game.myTeam)
-print(game.myTeam[1][1].name)
+game.CombatGame()
 
 
 
