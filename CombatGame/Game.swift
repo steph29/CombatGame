@@ -12,25 +12,13 @@ class Game {
     
     var teamNameArray: [String] = []
     var nameArray: [String] = []
-    var myTeam: [Any] = []
+    var myTeam: [[Player]] = []
     var player = Player(name: "", pointOfLife: 0, weapon: Epee())
-    var myTeam1: [Any] = []
-    var myTeam2: [Any] = []
+    var myTeam1: [Player] = []
+    var myTeam2: [Player] = []
     
-  func ChoiceOppositePlayer() -> String {
-        print("Choisissez votre adversaire:")
-        var opponent: String? = readLine()
-        if opponent == ""{
-            print("Choisissez votre adversaire")
-            opponent = readLine()!
-        }else{
-            opponent = "Pour essai"
-        }
-        
-        return opponent!
-    }
-    
-    func CreateGame() -> [Any]{
+  
+    func CreateGame() -> [Player]{
         for i in 1 ... 2 {
             print("Vous êtes l'équipe \(i) à jouer. Quelle est votre nom d'équipe?")
             myTeam2 = CreateTeam()
@@ -43,7 +31,7 @@ class Game {
        
     }
     
-   func CreateTeam() -> [Any]{
+   func CreateTeam() -> [Player] {
         
        // MARK - Identité de l'équipe
                 var teamName: String? = readLine()
@@ -57,7 +45,7 @@ class Game {
                 }
                 teamNameArray.append(upperTeamName!)
                 print("Bienvenue \(teamName!)")
-                var myTeam: [Any] = []
+                var myTeam: [Player] = []
     
         // MARK - Identité des personnages
                 for i in 1 ... 3 {
@@ -96,6 +84,7 @@ class Game {
                                 nameArray.append(upperName!)
                                 let combattant = Combattant(name: name!)
                                 let epee = Epee()
+                                combattant.weapon = epee
                                 print("Voici \(name!), le combattants à \(combattant.pointOfLife) point de vie et possède une \(epee.name) dont les dommages coûtent \(epee.damage) points")
                                 myTeam.append(combattant)
                                
@@ -113,6 +102,7 @@ class Game {
                                 nameArray.append(upperName!)
                                 let mage = Mage(name: name!)
                                 let sceptre = Sceptre()
+                                mage.weapon = sceptre
                                 print("Voici \(name!), le mage à \(mage.pointOfLife) points de vie et a le pouvoir de sauver vos personnages grâce à son \(sceptre.name) qui redonne \(abs(sceptre.damage)) points")
                                 myTeam.append(mage)
                               
@@ -130,8 +120,10 @@ class Game {
                                 nameArray.append(upperName!)
                                 let colosse = Colosse(name: name!)
                                 let lance = Lance()
+                                colosse.weapon = lance
                                 print("Voici \(name!), le colosse à \(colosse.pointOfLife) points de vie et possède une \(lance.name) dont les dommages coûtent \(lance.damage) points")
                                 myTeam.append(colosse)
+                               
                                 
                             case "4":
                                 print("Donnez lui un nom")
@@ -147,6 +139,8 @@ class Game {
                                 nameArray.append(upperName!)
                                 let nain = Nain(name: name!)
                                 let hache = Hache()
+                                nain.weapon = hache
+                                // let play:[Any] = [nain.name, nain.pointOfLife, nain.weapon.name]
                                 print("Voici \(name!), le nain à \(nain.pointOfLife) points de vie et possède une \(hache.name) dont les dommages coûtent \(hache.damage) points")
                                 myTeam.append(nain)
                            
@@ -157,6 +151,13 @@ class Game {
                         } // fin de la boucle creation de 3 personages
                     return myTeam
                 }// fin du CreateTeam
+    
+    func affichage() -> String {
+       return colosse.name
+    }
+    
+    
+    
     
     func Resurrect(player: Player) -> Int {
          let sceptre = Sceptre()

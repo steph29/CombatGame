@@ -10,9 +10,11 @@ import Foundation
 
 var game = Game()
 var mage = Mage(name: "")
+var nain = Nain(name: "")
+var colosse = Colosse(name: "")
 game.CreateGame()
 print(game.myTeam)
-print(game.myTeam1[2])
-var play = game.myTeam2[2]
+print(game.myTeam[1][1].name)
+
 
 
