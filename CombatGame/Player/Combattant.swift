@@ -11,6 +11,6 @@ import Foundation
 class Combattant: Player {
 
     init(name: String) {
-        super.init(name: name, pointOfLife: 100, weapon: Epee())
+        super.init(name: name, type: "combattant", pointOfLife: 100, weapon: Epee())
     }
 }

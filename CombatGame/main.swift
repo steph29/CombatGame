@@ -12,8 +12,7 @@ var game = Game()
 var mage = Mage(name: "")
 var nain = Nain(name: "")
 var colosse = Colosse(name: "")
+var epee = Epee()
 game.CreateGame()
 game.CombatGame()
-
-
 
