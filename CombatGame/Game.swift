@@ -167,20 +167,37 @@ class Game {
                 print("Veuillez choisir un de vos joueurs")
                 friendlyPlayer = readLine()
             }while(!(friendlyPlayer == "1" || friendlyPlayer == "2" || friendlyPlayer == "3") || friendlyPlayer == "")
-        }else {
-            
-                switch friendlyPlayer {
+        }
+             switch friendlyPlayer {
                 case "1":
+                    if IsDead(player: myTeam1[0]){
+                        repeat{
+                            print("Ce personnage est décédé, vous devez en choisir un autre ")
+                            friendlyPlayer = readLine()
+                            }while friendlyPlayer == "1"
+                        }
                     frPlayer = myTeam1[0]
                 case "2":
+                    if IsDead(player: myTeam1[1]){
+                        repeat{
+                            print("Ce personnage est décédé, vous devez en choisir un autre ")
+                            friendlyPlayer = readLine()
+                            }while friendlyPlayer == "2"
+                        }
                     frPlayer = myTeam1[1]
                 case "3":
+                        if IsDead(player: myTeam1[2]){
+                            repeat{
+                                print("Ce personnage est décédé, vous devez en choisir un autre ")
+                                friendlyPlayer = readLine()
+                            }while friendlyPlayer == "3"
+                         }
                     frPlayer = myTeam1[2]
                 default:
                     break
                 }
         }
-        }
+    
     
     
         func ChoiceOppositePlayer() {
@@ -193,24 +210,41 @@ class Game {
             print("Veuillez choisir un adversaire")
             opponent = readLine()
             } while(!(opponent == "1" || opponent == "2" || opponent == "3") || opponent == "")
-            }else {
-            
-                switch opponent {
+            }
+            switch opponent {
                 case "1":
+                        if IsDead(player: myTeam2[0]){
+                            repeat{
+                                print("Ce personnage est décédé, vous devez en choisir un autre ")
+                                opponent = readLine()
+                            }while opponent == "1"
+                        }
                      opPlayer = myTeam2[0]
                 case "2":
+                    if IsDead(player: myTeam2[1]){
+                        repeat{
+                            print("Ce personnage est décédé, vous devez en choisir un autre ")
+                            opponent = readLine()
+                        }while opponent == "2"
+                       }
                     opPlayer = myTeam2[1]
                 case "3":
+                        if IsDead(player: myTeam2[2]){
+                            repeat{
+                                print("Ce personnage est décédé, vous devez en choisir un autre ")
+                                opponent = readLine()
+                              }while opponent == "3"
+                          }
                     opPlayer = myTeam2[2]
                 default:
                     break
                     }
                 }
-            }
+    
 
     func CombatGame() {
-            var pointOfLiveTeam1 = myTeam1[0].pointOfLife + myTeam1[1].pointOfLife + myTeam1[2].pointOfLife
-            var pointOfLiveTeam2 = myTeam2[0].pointOfLife + myTeam2[1].pointOfLife + myTeam2[2].pointOfLife
+            let pointOfLiveTeam1 = myTeam1[0].pointOfLife + myTeam1[1].pointOfLife + myTeam1[2].pointOfLife
+            let pointOfLiveTeam2 = myTeam2[0].pointOfLife + myTeam2[1].pointOfLife + myTeam2[2].pointOfLife
         if !(pointOfLiveTeam1 == 0 || pointOfLiveTeam2 == 0){
         repeat{
             for i in 1...2 {
@@ -225,11 +259,16 @@ class Game {
                         choice = readLine()
                         } while(!(choice == "1" || choice == "2" ) || choice == "")
                     }
-                else{
-                    if i == 1 {
+                if i == 1 {
                         if choice == "1"{
                             print("Choisissez votre personnage:")
                             ChoiceFriendlyPlayer()
+                            if frPlayer.type == mage.type {
+                                repeat{
+                                print("Le mage n'est pas un guerrier, veuillez choisir un autre personnage:")
+                                ChoiceFriendlyPlayer()
+                                }while (frPlayer.type == mage.type)
+                            }
                             print("Voici vos adversaire:")
                             ChoiceOppositePlayer()
                             print("Le combat commence!")
@@ -242,6 +281,12 @@ class Game {
                         if choice == "1"{
                             print("Choisissez votre personnage:")
                             ChoiceOppositePlayer()
+                            if opPlayer.type == mage.type {
+                                repeat{
+                                    print("Le mage n'est pas un guerrier, veuillez choisir un autre personnage:")
+                                    ChoiceOppositePlayer()
+                                }while (opPlayer.type == mage.type)
+                            }
                             print("Voici vos adversaire:")
                             ChoiceFriendlyPlayer()
                             print("Le combat commence!")
@@ -251,8 +296,7 @@ class Game {
                             print(Resurrect(player: opPlayer))
                                 }
                             }
-                        }
-                }
+                       }
             }while (!(pointOfLiveTeam1 == 0 || pointOfLiveTeam2 == 0))
         }
     }
@@ -282,6 +326,7 @@ class Game {
             print("Votre adversaire vient de perdre \(lance.damage). Il lui reste donc désormais \(player.pointOfLife) de points de vie.")
             if IsDead(player: player){
                 print("Félicitation, vous venez d'éliminer un adversaire!")
+                
             }
         }else if weapon.name == "epee" {
              player.pointOfLife = player.pointOfLife - epee.damage
