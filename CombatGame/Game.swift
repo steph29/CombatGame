@@ -32,6 +32,21 @@ class Game {
        
     }
     
+    func NamePlayer() -> String {
+        print("Donnez lui un nom")
+        var name: String? = readLine()
+        var upperName = name?.uppercased()
+        if nameArray.contains(upperName!) || upperName! == "" {
+            repeat{
+                print("Veuillez en donner un autre nom")
+                name = readLine()
+                upperName = name!.uppercased()
+            } while (nameArray.contains(upperName!) || upperName! == "")
+        }
+        nameArray.append(upperName!)
+        return name!
+    }
+    
    func CreateTeam() -> [Player] {
         
        // MARK - Identité de l'équipe
@@ -70,82 +85,39 @@ class Game {
                                 choice = readLine()!
                                 } while (!(choice == "1" || choice == "2" || choice == "3" || choice == "4"))
                             }
+                            
                             switch choice {
                             case "1":
-                                print("Donnez lui un nom")
-                                var name: String? = readLine()
-                                var upperName = name?.uppercased()
-                                if nameArray.contains(upperName!) || upperName! == "" {
-                                    repeat{
-                                        print("Veuillez en donner un autre nom")
-                                        name = readLine()
-                                        upperName = name!.uppercased()
-                                    } while (nameArray.contains(upperName!) || upperName! == "")
-                                }
-                                nameArray.append(upperName!)
-                                let combattant = Combattant(name: name!)
+                                let combattant = Combattant(name: NamePlayer())
                                 let epee = Epee()
                                 combattant.weapon = epee
                                 combattant.type = "combattant"
-                                print("Voici \(name!), le combattants à \(combattant.pointOfLife) point de vie et possède une \(epee.name) dont les dommages coûtent \(epee.damage) points")
+                                print("Voici \(combattant.name), le combattants à \(combattant.pointOfLife) point de vie et possède une \(epee.name) dont les dommages coûtent \(epee.damage) points")
                                 myTeam.append(combattant)
                                
                             case "2":
-                                print("Donnez lui un nom")
-                                var name: String? = readLine()
-                                var upperName = name?.uppercased()
-                                if nameArray.contains(upperName!) || upperName! == "" {
-                                    repeat{
-                                        print("Veuillez en donner un autre nom")
-                                        name = readLine()
-                                        upperName = name!.uppercased()
-                                    } while (nameArray.contains(upperName!) || upperName! == "")
-                                }
-                                nameArray.append(upperName!)
-                                let mage = Mage(name: name!)
+                                 let mage = Mage(name: NamePlayer())
                                 let sceptre = Sceptre()
                                 mage.weapon = sceptre
                                 mage.type = "mage"
-                                print("Voici \(name!), le mage à \(mage.pointOfLife) points de vie et a le pouvoir de sauver vos personnages grâce à son \(sceptre.name) qui redonne \(abs(sceptre.damage)) points")
+                                print("Voici \(mage.name), le mage à \(mage.pointOfLife) points de vie et a le pouvoir de sauver vos personnages grâce à son \(sceptre.name) qui redonne \(abs(sceptre.damage)) points")
                                 myTeam.append(mage)
                               
                             case "3":
-                                print("Donnez lui un nom")
-                                var name: String? = readLine()
-                                var upperName = name?.uppercased()
-                                if nameArray.contains(upperName!) || upperName! == "" {
-                                    repeat{
-                                        print("Veuillez en donner un autre nom")
-                                        name = readLine()
-                                        upperName = name!.uppercased()
-                                    } while (nameArray.contains(upperName!) || upperName! == "")
-                                }
-                                nameArray.append(upperName!)
-                                let colosse = Colosse(name: name!)
+                                let colosse = Colosse(name: NamePlayer())
                                 let lance = Lance()
                                 colosse.weapon = lance
                                 colosse.type = "colosse"
-                                print("Voici \(name!), le colosse à \(colosse.pointOfLife) points de vie et possède une \(lance.name) dont les dommages coûtent \(lance.damage) points")
+                                print("Voici \(colosse.name), le colosse à \(colosse.pointOfLife) points de vie et possède une \(lance.name) dont les dommages coûtent \(lance.damage) points")
                                 myTeam.append(colosse)
                                
                                 
                             case "4":
-                                print("Donnez lui un nom")
-                                var name: String? = readLine()
-                                var upperName = name?.uppercased()
-                                if nameArray.contains(upperName!) || upperName! == "" {
-                                    repeat{
-                                        print("Veuillez en donner un autre nom")
-                                        name = readLine()
-                                        upperName = name!.uppercased()
-                                    } while (nameArray.contains(upperName!) || upperName! == "")
-                                }
-                                nameArray.append(upperName!)
-                                let nain = Nain(name: name!)
+                                let nain = Nain(name: NamePlayer())
                                 let hache = Hache()
                                 nain.weapon = hache
                                 nain.type = "nain"
-                                print("Voici \(name!), le nain à \(nain.pointOfLife) points de vie et possède une \(hache.name) dont les dommages coûtent \(hache.damage) points")
+                                print("Voici \(nain.name), le nain à \(nain.pointOfLife) points de vie et possède une \(hache.name) dont les dommages coûtent \(hache.damage) points")
                                 myTeam.append(nain)
                            
                             default:
@@ -155,163 +127,141 @@ class Game {
                         } // fin de la boucle creation de 3 personages
                     return myTeam
                 }// fin du CreateTeam
-    
-    func ChoiceFriendlyPlayer()  {
-        // Le mage ne peut pas combattre
-         print(     "1. \(myTeam1[0].name) est un \(myTeam1[0].type) équipé de \(myTeam1[0].weapon.name) provoquant \(myTeam1[0].weapon.damage) de dégat et a \(myTeam1[0].pointOfLife) points de vie"
-                + "\n2. \(myTeam1[1].name) est un \(myTeam1[1].type) équipé de \(myTeam1[1].weapon.name) provoquant \(myTeam1[1].weapon.damage) de dégat et a \(myTeam1[1].pointOfLife) points de vie"
-                + "\n3. \(myTeam1[2].name) est un \(myTeam1[2].type) équipé de \(myTeam1[2].weapon.name) provoquant \(myTeam1[2].weapon.damage) de dégat et a \(myTeam1[2].pointOfLife) points de vie")
-        var friendlyPlayer: String? = readLine()
-        if !(friendlyPlayer == "1" || friendlyPlayer == "2" || friendlyPlayer == "3") || friendlyPlayer == ""{
+ 
+    func DisplayMyTeam(index: Int) -> Player {
+        var myTeam: [Player] = []
+        var player = Player(name: "", type: "", pointOfLife: 0, weapon: epee)
+        if index == 0{
+            myTeam = myTeam1
+        }else if index == 1{
+            myTeam = myTeam2
+        }
+        print(  "1. \(myTeam[0].name) est un \(myTeam[0].type) équipé de \(myTeam[0].weapon.name) provoquant \(myTeam[0].weapon.damage) de dégat et a \(myTeam[0].pointOfLife) points de vie"
+            + "\n2. \(myTeam[1].name) est un \(myTeam[1].type) équipé de \(myTeam[1].weapon.name) provoquant \(myTeam[1].weapon.damage) de dégat et a \(myTeam[1].pointOfLife) points de vie"
+            + "\n3. \(myTeam[2].name) est un \(myTeam[2].type) équipé de \(myTeam[2].weapon.name) provoquant \(myTeam[2].weapon.damage) de dégat et a \(myTeam[2].pointOfLife) points de vie")
+        var choice: String? = readLine()
+        if !(choice == "1" || choice == "2" || choice == "3"){
             repeat{
                 print("Veuillez choisir un de vos joueurs")
-                friendlyPlayer = readLine()
-            }while(!(friendlyPlayer == "1" || friendlyPlayer == "2" || friendlyPlayer == "3") || friendlyPlayer == "")
-        }
-             switch friendlyPlayer {
-                case "1":
-                    if IsDead(player: myTeam1[0]){
-                        repeat{
-                            print("Ce personnage est décédé, vous devez en choisir un autre ")
-                            friendlyPlayer = readLine()
-                            }while friendlyPlayer == "1"
-                        }
-                    frPlayer = myTeam1[0]
-                case "2":
-                    if IsDead(player: myTeam1[1]){
-                        repeat{
-                            print("Ce personnage est décédé, vous devez en choisir un autre ")
-                            friendlyPlayer = readLine()
-                            }while friendlyPlayer == "2"
-                        }
-                    frPlayer = myTeam1[1]
-                case "3":
-                        if IsDead(player: myTeam1[2]){
-                            repeat{
-                                print("Ce personnage est décédé, vous devez en choisir un autre ")
-                                friendlyPlayer = readLine()
-                            }while friendlyPlayer == "3"
-                         }
-                    frPlayer = myTeam1[2]
-                default:
-                    break
-                }
-        }
-    
-    
-    
-        func ChoiceOppositePlayer() {
-        print(    "\n1. \(myTeam2[0].name) est un \(myTeam2[0].type) équipé de \(myTeam2[0].weapon.name) provoquant \(myTeam2[0].weapon.damage) de dégat et a \(myTeam2[0].pointOfLife) points de vie"
-                + "\n2. \(myTeam2[1].name) est un \(myTeam2[1].type) équipé de \(myTeam2[1].weapon.name) provoquant \(myTeam2[1].weapon.damage) de dégat et a \(myTeam2[1].pointOfLife) points de vie"
-                + "\n3. \(myTeam2[2].name) est un \(myTeam2[2].type) équipé de \(myTeam2[2].weapon.name) provoquant \(myTeam2[2].weapon.damage) de dégat et a \(myTeam2[2].pointOfLife) points de vie")
-        var opponent: String? = readLine()
-        if !(opponent == "1" || opponent == "2" || opponent == "3") || opponent == ""{
-            repeat{
-            print("Veuillez choisir un adversaire")
-            opponent = readLine()
-            } while(!(opponent == "1" || opponent == "2" || opponent == "3") || opponent == "")
+                choice = readLine()
+            }while(!(choice == "1" || choice == "2" || choice == "3"))
             }
-            switch opponent {
-                case "1":
-                        if IsDead(player: myTeam2[0]){
-                            repeat{
-                                print("Ce personnage est décédé, vous devez en choisir un autre ")
-                                opponent = readLine()
-                            }while opponent == "1"
-                        }
-                     opPlayer = myTeam2[0]
-                case "2":
-                    if IsDead(player: myTeam2[1]){
+            switch choice {
+            case "1": if AskForANoDeadPlayer(indexTeam: index, indexPlayer: (Int(choice!)! - 1)) {
                         repeat{
-                            print("Ce personnage est décédé, vous devez en choisir un autre ")
-                            opponent = readLine()
-                        }while opponent == "2"
-                       }
-                    opPlayer = myTeam2[1]
-                case "3":
-                        if IsDead(player: myTeam2[2]){
-                            repeat{
-                                print("Ce personnage est décédé, vous devez en choisir un autre ")
-                                opponent = readLine()
-                              }while opponent == "3"
-                          }
-                    opPlayer = myTeam2[2]
-                default:
-                    break
+                            choice = readLine()
+                        }while (choice == "1")
                     }
-                }
-    
-
-    func CombatGame() {
-            let pointOfLiveTeam1 = myTeam1[0].pointOfLife + myTeam1[1].pointOfLife + myTeam1[2].pointOfLife
-            let pointOfLiveTeam2 = myTeam2[0].pointOfLife + myTeam2[1].pointOfLife + myTeam2[2].pointOfLife
-        if !(pointOfLiveTeam1 == 0 || pointOfLiveTeam2 == 0){
-        repeat{
-            for i in 1...2 {
-             print("\(teamNameArray[i-1]), Voulez-vous attaquer ou soigner?"
-            + "\n1. Attaquer"
-            + "\n2. Soigner")
-            
-            var choice: String? = readLine()
-                if !(choice == "1" || choice == "2") || choice == ""{
-                    repeat{
-                        print("Veuillez faire un choix")
-                        choice = readLine()
-                        } while(!(choice == "1" || choice == "2" ) || choice == "")
-                    }
-                if i == 1 {
-                        if choice == "1"{
-                            print("Choisissez votre personnage:")
-                            ChoiceFriendlyPlayer()
-                            if frPlayer.type == mage.type {
-                                repeat{
-                                print("Le mage n'est pas un guerrier, veuillez choisir un autre personnage:")
-                                ChoiceFriendlyPlayer()
-                                }while (frPlayer.type == mage.type)
-                            }
-                            print("Voici vos adversaire:")
-                            ChoiceOppositePlayer()
-                            print("Le combat commence!")
-                            print(Hit(player: opPlayer, weapon: frPlayer.weapon))
-                        }else{
-                            ChoiceFriendlyPlayer()
-                            print(Resurrect(player: frPlayer))
-                                }
-                    }else{
-                        if choice == "1"{
-                            print("Choisissez votre personnage:")
-                            ChoiceOppositePlayer()
-                            if opPlayer.type == mage.type {
-                                repeat{
-                                    print("Le mage n'est pas un guerrier, veuillez choisir un autre personnage:")
-                                    ChoiceOppositePlayer()
-                                }while (opPlayer.type == mage.type)
-                            }
-                            print("Voici vos adversaire:")
-                            ChoiceFriendlyPlayer()
-                            print("Le combat commence!")
-                            print(Hit(player: frPlayer , weapon: opPlayer.weapon))
-                        }else{
-                            ChoiceOppositePlayer()
-                            print(Resurrect(player: opPlayer))
-                                }
-                            }
-                       }
-            }while (!(pointOfLiveTeam1 == 0 || pointOfLiveTeam2 == 0))
-        }
+            case "2":
+                if AskForANoDeadPlayer(indexTeam: index, indexPlayer: (Int(choice!)! - 1)) {
+                        repeat{
+                            choice = readLine()
+                        }while (choice == "2")
+                        }
+            case "3":
+                if AskForANoDeadPlayer(indexTeam: index, indexPlayer: (Int(choice!)! - 1)) {
+                        repeat{
+                            choice = readLine()
+                        }while (choice == "3")
+                        }
+             default:
+                break
+            }
+        player = myTeam[(Int(choice!)! - 1)]
+        return player
     }
     
     
-    func Resurrect(player: Player) -> Int {
-         let sceptre = Sceptre()
+    func AskForANoDeadPlayer(indexTeam: Int, indexPlayer: Int) -> Bool {
+        var isDead = false
+        var myTeam: [Player] = []
+        if indexTeam == 0 {
+            myTeam = myTeam1
+        }else if indexTeam == 1{
+            myTeam = myTeam2
+        }
+        if IsDead(player: myTeam[indexPlayer]){
+                print("Ce personnage est décédé, vous devez en choisir un autre ")
+                isDead = true
+        }
+        return isDead
+    }
+    
+    func CombatGame() {
+        var myTeam: [Player] = []
+            var j: Int = 0
+            repeat{
+                    for i in 0 ... 1{
+                        if i == 0 {
+                            myTeam = myTeam1
+                            j = 1
+                        }else if i == 1{
+                            myTeam = myTeam2
+                            j = 0
+                        }
+                print("\(teamNameArray[i]), Choisissez votre joueur: ")
+                frPlayer = DisplayMyTeam(index: i)
+                    if frPlayer.type == mage.type {
+                    var player = Player(name: "", type: "", pointOfLife: 0, weapon: epee)
+                    print("Qui voulez-vous soigner?"
+                        + "\n1. \(myTeam[0].name) avec \(myTeam[0].pointOfLife) points de vie"
+                        + "\n2. \(myTeam[1].name) avec \(myTeam[1].pointOfLife) points de vie"
+                        + "\n3. \(myTeam[2].name) avec \(myTeam[2].pointOfLife) points de vie"
+                    )
+                    var choiceInjured: String? = readLine()
+                        if !( choiceInjured == "1" || choiceInjured == "2" || choiceInjured == "3"){
+                            repeat {
+                                print("Choisissez un de vos personnage à guérir: ")
+                                choiceInjured = readLine()
+                            }while (!( choiceInjured == "1" || choiceInjured == "2" || choiceInjured == "3"))
+                        }
+                    
+                            switch choiceInjured {
+                            case "1":
+                                if AskForANoDeadPlayer(indexTeam: i, indexPlayer: (Int(choiceInjured!)! - 1)) {
+                                repeat{
+                                        choiceInjured = readLine()
+                                    }while (choiceInjured == "1")
+                                }
+                         case "2":
+                                if AskForANoDeadPlayer(indexTeam: i, indexPlayer: (Int(choiceInjured!)! - 1)) {
+                                    repeat{
+                                        choiceInjured = readLine()
+                                    }while (choiceInjured == "2")
+                                }
+                          case "3":
+                                if AskForANoDeadPlayer(indexTeam: i, indexPlayer: (Int(choiceInjured!)! - 1)) {
+                                    repeat{
+                                        choiceInjured = readLine()
+                                    }while (choiceInjured == "3")
+                                }
+                           default:
+                                break
+                            }
+                    player = myTeam[(Int(choiceInjured!)! - 1)]
+                    Resurrect(player: player)
+                }else{
+                    print("Choisissez votre adversaire: ")
+                    opPlayer = DisplayMyTeam(index: j)
+                    Hit(player: opPlayer, weapon: frPlayer.weapon)
+                    
+                    }
+               }
+                let gameOver = IsGameOver(myTeam: myTeam)
+                if gameOver == true{
+                    break
+                }
+            }while !(IsGameOver(myTeam: myTeam))
+        }
+    
+    // MARK - function attack or treat
+    func Resurrect(player: Player) {
+        let sceptre = Sceptre()
         player.pointOfLife = player.pointOfLife + sceptre.damage
         print ("Vous venez de recupérer \(sceptre.damage). Vous avez désormais \(player.pointOfLife) de points de vie.")
-        return player.pointOfLife
     }
     
-
-    
-    func Hit(player: Player, weapon: Weapon)  {
+    func Hit(player: Player, weapon: Weapon) {
         let hache = Hache()
         let lance = Lance()
         let epee = Epee()
@@ -342,8 +292,47 @@ class Game {
         var isDead = false
         if player.pointOfLife <= 0 {
             isDead = true
+            player.pointOfLife = 0
         }
         return isDead
     }
-    }// Fin de la class
+    
+    // MARK - Condition of Game Over
+    func AreYouFighter(myTeam: [Player]) -> [Player]{
+        var fighterArray: [Player] = []
+        for i in 0 ... (myTeam.count - 1) {
+            if (myTeam[i].type == colosse.type || myTeam[i].type == combattant.type || myTeam[i].type == nain.type) {
+                fighterArray.append(myTeam[i])
+            }
+        }
+        return fighterArray
+    }
+    
+    func AreYouADeadFighter(myTeam: [Player]) -> [Player] {
+        var deadFighter: [Player] = []
+        for i in 0 ... (AreYouFighter(myTeam: myTeam).count - 1){
+        if IsDead(player: AreYouFighter(myTeam: myTeam)[i]) {
+            deadFighter.append(myTeam[i])
+            }
+        }
+        return deadFighter
+    }
+    
+    func AllFighterDead(myTeam: [Player]) -> Bool{
+        var allDead = false
+        if AreYouFighter(myTeam: myTeam).count == AreYouADeadFighter(myTeam: myTeam).count{
+            allDead = true
+        }
+        return allDead
+    }
+    
+    func IsGameOver(myTeam: [Player]) -> Bool{
+        var isGameOver = false
+        if (AllFighterDead(myTeam: myTeam)) {
+            isGameOver = true
+        }
+        return isGameOver
+    }
+}
+
 
