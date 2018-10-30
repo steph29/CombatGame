@@ -189,15 +189,18 @@ class Game {
     
     func CombatGame() {
         var myTeam: [Player] = []
+        var deadTeam: [Player] = []
             var j: Int = 0
             repeat{
                     for i in 0 ... 1{
                         if i == 0 {
                             myTeam = myTeam1
                             j = 1
+                            deadTeam = myTeam2
                         }else if i == 1{
                             myTeam = myTeam2
                             j = 0
+                            deadTeam = myTeam1
                         }
                 print("\(teamNameArray[i]), Choisissez votre joueur: ")
                 frPlayer = DisplayMyTeam(index: i)
@@ -243,15 +246,17 @@ class Game {
                 }else{
                     print("Choisissez votre adversaire: ")
                     opPlayer = DisplayMyTeam(index: j)
-                    Hit(player: opPlayer, weapon: frPlayer.weapon)
+                    opPlayer = Hit(player: opPlayer, weapon: frPlayer.weapon)
                     
                     }
+                        let gameOver = IsGameOver(myTeam: deadTeam)
+                        if gameOver == true{
+                            break
+                        }
                }
-                let gameOver = IsGameOver(myTeam: myTeam)
-                if gameOver == true{
-                    break
-                }
-            }while !(IsGameOver(myTeam: myTeam))
+                
+                
+            }while !(IsGameOver(myTeam: deadTeam))
         }
     
     // MARK - function attack or treat
@@ -261,7 +266,7 @@ class Game {
         print ("Vous venez de recupérer \(sceptre.damage). Vous avez désormais \(player.pointOfLife) de points de vie.")
     }
     
-    func Hit(player: Player, weapon: Weapon) {
+    func Hit(player: Player, weapon: Weapon) -> Player {
         let hache = Hache()
         let lance = Lance()
         let epee = Epee()
@@ -285,6 +290,7 @@ class Game {
                 print("Félicitation, vous venez d'éliminer un adversaire!")
             }
         }
+        return player
     }
     
     
