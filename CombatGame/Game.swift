@@ -187,9 +187,9 @@ class Game {
         return isDead
     }
     
-    private func IsAFighter(myTeam: [Player], index: Int) -> Bool{
+    private func IsAFighter(player: Player) -> Bool{
         var isAFighter = false
-        if !(myTeam[index] is Mage){
+        if !(player is Mage){
             isAFighter = true
         }
         return isAFighter
@@ -232,29 +232,15 @@ class Game {
     return player
     }
     
-    private func RandomPlay(myTeam: [Player]){
-        print("---------LE COFFRE MAGIQUE--------- "
-            + "\nChoisissez le personnage qui en bénéficiera:"
-            + "\n1. \(myTeam[0].name)"
-            + "\n2. \(myTeam[1].name)"
-            + "\n3. \(myTeam[2].name)")
-        var choice: String? = readLine()
-        if !(choice == "1" || choice == "2" || choice == "3") {
-            repeat{
-                print("Veuillez choisir parmi les personnages proposés !")
-                choice = readLine()!
-            } while (!(choice == "1" || choice == "2" || choice == "3"))
-        }
-        
-        if IsAFighter(myTeam: myTeam, index: (Int(choice!)! - 1)){
-                ExchangeYourWeapon(player: myTeam[(Int(choice!)! - 1)])
-                print("\(myTeam[(Int(choice!)! - 1)].name) est désormais équipé de \(myTeam[(Int(choice!)! - 1)].weapon.name)")
+    private func RandomPlay(myTeam: [Player], player: Player){
+        print("---------LE COFFRE MAGIQUE--------- ")
+        if IsAFighter(player: player) {
+                ExchangeYourWeapon(player: player)
+                print("\(player.name) est désormais équipé de \(player.weapon.name)")
         }else {
-            ImproveYourScepter(player: myTeam[(Int(choice!)! - 1)])
-            print("\(myTeam[(Int(choice!)! - 1)].name) a un nouveau sceptre qui soigne de \(myTeam[(Int(choice!)! - 1)].weapon.damage) points de vie.")
+            ImproveYourScepter(player: player)
+            print("\(player.name) a un nouveau sceptre qui soigne de \(player.weapon.damage) points de vie.")
         }
-        
-        
     }
     
     public func CombatGame() {
@@ -276,10 +262,10 @@ class Game {
                         }
                 turn += 1
                 print("\(teamNameArray[i]), Choisissez votre joueur: ")
-                if turn == randomInt{
-                    RandomPlay(myTeam: myTeam)
-                }else{
                 frPlayer = DisplayMyTeam(index: i)
+                if turn == randomInt{
+                    RandomPlay(myTeam: myTeam, player: frPlayer)
+                }
                     if frPlayer is Mage {
                     var player = Player(name: "", type: "", pointOfLife: 0, weapon: Epee())
                     print("Qui voulez-vous soigner?"
@@ -331,9 +317,7 @@ class Game {
                             break
                         }
                    }
-                }
-                
-            }while !(IsGameOver(myTeam: deadTeam))
+             }while !(IsGameOver(myTeam: deadTeam))
         }
     
     // MARK - function attack or treat
