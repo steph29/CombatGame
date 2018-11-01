@@ -1,5 +1,5 @@
 //
-//  Hache.swift
+//  Mage.swift
 //  CombatGame
 //
 //  Created by stephane verardo on 05/10/2018.
@@ -8,10 +8,8 @@
 
 import Foundation
 
-class Hache: Weapon {
-
-    init() {
-       super.init(damage: 15, name: "hache")
+class Wizard: Player {
+    init(name: String) {
+        super.init(name: name, type: "mage", pointOfLife: 80, weapon: Scepter())
     }
-    
 }

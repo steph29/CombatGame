@@ -1,5 +1,5 @@
 //
-//  Combattant.swift
+//  Nain.swift
 //  CombatGame
 //
 //  Created by stephane verardo on 05/10/2018.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-class Combattant: Player {
-
+class Dwarf: Player {
+ 
     init(name: String) {
-        super.init(name: name, type: "combattant", pointOfLife: 100, weapon: Epee())
+        super.init(name: name, type: "nain", pointOfLife: 60, weapon: Chopped())
     }
 }

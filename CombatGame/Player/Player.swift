@@ -8,11 +8,12 @@
 
 import Foundation
 
+// MARK - Creation of Player with the different parameters
 class Player {
-   public var name: String
-   public var type: String
-   public var pointOfLife: Int
-   public var weapon: Weapon
+   public var name: String // name of the player
+   public var type: String // type of the player
+   public var pointOfLife: Int // points of life of the player
+   public var weapon: Weapon // weapon using by the player
     
     init(name: String, type: String, pointOfLife: Int, weapon: Weapon){
         self.name = name

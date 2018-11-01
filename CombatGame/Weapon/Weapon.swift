@@ -8,9 +8,10 @@
 
 import Foundation
 
+// MARK - Creation of class about weapons with differents parameters
 class Weapon {
-    public var damage: Int
-    public var name: String
+    public var damage: Int // effect of the weapons
+    public var name: String // name of the weapon
   
    init(damage: Int, name: String) {
         self.damage = damage

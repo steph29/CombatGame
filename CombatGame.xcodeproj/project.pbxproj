@@ -11,14 +11,14 @@
 		B15F2D83215EA58A00074A70 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15F2D82215EA58A00074A70 /* Player.swift */; };
 		B1BDB99C216549AC00EB54B0 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDB99B216549AC00EB54B0 /* Weapon.swift */; };
 		B1BDB9A02167E10200EB54B0 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDB99F2167E10200EB54B0 /* Game.swift */; };
-		B1BDB9A22167F08000EB54B0 /* Hache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDB9A12167F08000EB54B0 /* Hache.swift */; };
-		B1BDB9A42167F08D00EB54B0 /* Epee.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDB9A32167F08D00EB54B0 /* Epee.swift */; };
-		B1BDB9A62167F09900EB54B0 /* Lance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDB9A52167F09900EB54B0 /* Lance.swift */; };
-		B1BDB9A82167F0A800EB54B0 /* Sceptre.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDB9A72167F0A800EB54B0 /* Sceptre.swift */; };
-		B1BDB9AA2167F0B400EB54B0 /* Colosse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDB9A92167F0B400EB54B0 /* Colosse.swift */; };
-		B1BDB9AC2167F0BF00EB54B0 /* Mage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDB9AB2167F0BF00EB54B0 /* Mage.swift */; };
-		B1BDB9AE2167F0CA00EB54B0 /* Nain.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDB9AD2167F0CA00EB54B0 /* Nain.swift */; };
-		B1BDB9B02167F0D900EB54B0 /* Combattant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDB9AF2167F0D900EB54B0 /* Combattant.swift */; };
+		B1BDB9A22167F08000EB54B0 /* Chopped.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDB9A12167F08000EB54B0 /* Chopped.swift */; };
+		B1BDB9A42167F08D00EB54B0 /* Sword.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDB9A32167F08D00EB54B0 /* Sword.swift */; };
+		B1BDB9A62167F09900EB54B0 /* Spear.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDB9A52167F09900EB54B0 /* Spear.swift */; };
+		B1BDB9A82167F0A800EB54B0 /* Scepter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDB9A72167F0A800EB54B0 /* Scepter.swift */; };
+		B1BDB9AA2167F0B400EB54B0 /* Colossus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDB9A92167F0B400EB54B0 /* Colossus.swift */; };
+		B1BDB9AC2167F0BF00EB54B0 /* Wizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDB9AB2167F0BF00EB54B0 /* Wizard.swift */; };
+		B1BDB9AE2167F0CA00EB54B0 /* Dwarf.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDB9AD2167F0CA00EB54B0 /* Dwarf.swift */; };
+		B1BDB9B02167F0D900EB54B0 /* Fighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1BDB9AF2167F0D900EB54B0 /* Fighter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,14 +39,14 @@
 		B15F2D82215EA58A00074A70 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		B1BDB99B216549AC00EB54B0 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
 		B1BDB99F2167E10200EB54B0 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
-		B1BDB9A12167F08000EB54B0 /* Hache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hache.swift; sourceTree = "<group>"; };
-		B1BDB9A32167F08D00EB54B0 /* Epee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Epee.swift; sourceTree = "<group>"; };
-		B1BDB9A52167F09900EB54B0 /* Lance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lance.swift; sourceTree = "<group>"; };
-		B1BDB9A72167F0A800EB54B0 /* Sceptre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sceptre.swift; sourceTree = "<group>"; };
-		B1BDB9A92167F0B400EB54B0 /* Colosse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colosse.swift; sourceTree = "<group>"; };
-		B1BDB9AB2167F0BF00EB54B0 /* Mage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mage.swift; sourceTree = "<group>"; };
-		B1BDB9AD2167F0CA00EB54B0 /* Nain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nain.swift; sourceTree = "<group>"; };
-		B1BDB9AF2167F0D900EB54B0 /* Combattant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combattant.swift; sourceTree = "<group>"; };
+		B1BDB9A12167F08000EB54B0 /* Chopped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chopped.swift; sourceTree = "<group>"; };
+		B1BDB9A32167F08D00EB54B0 /* Sword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sword.swift; sourceTree = "<group>"; };
+		B1BDB9A52167F09900EB54B0 /* Spear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spear.swift; sourceTree = "<group>"; };
+		B1BDB9A72167F0A800EB54B0 /* Scepter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scepter.swift; sourceTree = "<group>"; };
+		B1BDB9A92167F0B400EB54B0 /* Colossus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colossus.swift; sourceTree = "<group>"; };
+		B1BDB9AB2167F0BF00EB54B0 /* Wizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wizard.swift; sourceTree = "<group>"; };
+		B1BDB9AD2167F0CA00EB54B0 /* Dwarf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dwarf.swift; sourceTree = "<group>"; };
+		B1BDB9AF2167F0D900EB54B0 /* Fighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fighter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,10 +91,10 @@
 			isa = PBXGroup;
 			children = (
 				B15F2D82215EA58A00074A70 /* Player.swift */,
-				B1BDB9A92167F0B400EB54B0 /* Colosse.swift */,
-				B1BDB9AB2167F0BF00EB54B0 /* Mage.swift */,
-				B1BDB9AD2167F0CA00EB54B0 /* Nain.swift */,
-				B1BDB9AF2167F0D900EB54B0 /* Combattant.swift */,
+				B1BDB9A92167F0B400EB54B0 /* Colossus.swift */,
+				B1BDB9AB2167F0BF00EB54B0 /* Wizard.swift */,
+				B1BDB9AD2167F0CA00EB54B0 /* Dwarf.swift */,
+				B1BDB9AF2167F0D900EB54B0 /* Fighter.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -103,10 +103,10 @@
 			isa = PBXGroup;
 			children = (
 				B1BDB99B216549AC00EB54B0 /* Weapon.swift */,
-				B1BDB9A12167F08000EB54B0 /* Hache.swift */,
-				B1BDB9A32167F08D00EB54B0 /* Epee.swift */,
-				B1BDB9A52167F09900EB54B0 /* Lance.swift */,
-				B1BDB9A72167F0A800EB54B0 /* Sceptre.swift */,
+				B1BDB9A12167F08000EB54B0 /* Chopped.swift */,
+				B1BDB9A32167F08D00EB54B0 /* Sword.swift */,
+				B1BDB9A52167F09900EB54B0 /* Spear.swift */,
+				B1BDB9A72167F0A800EB54B0 /* Scepter.swift */,
 			);
 			path = Weapon;
 			sourceTree = "<group>";
@@ -168,17 +168,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1BDB9B02167F0D900EB54B0 /* Combattant.swift in Sources */,
-				B1BDB9A62167F09900EB54B0 /* Lance.swift in Sources */,
+				B1BDB9B02167F0D900EB54B0 /* Fighter.swift in Sources */,
+				B1BDB9A62167F09900EB54B0 /* Spear.swift in Sources */,
 				B1BDB9A02167E10200EB54B0 /* Game.swift in Sources */,
-				B1BDB9AC2167F0BF00EB54B0 /* Mage.swift in Sources */,
-				B1BDB9A22167F08000EB54B0 /* Hache.swift in Sources */,
-				B1BDB9AE2167F0CA00EB54B0 /* Nain.swift in Sources */,
+				B1BDB9AC2167F0BF00EB54B0 /* Wizard.swift in Sources */,
+				B1BDB9A22167F08000EB54B0 /* Chopped.swift in Sources */,
+				B1BDB9AE2167F0CA00EB54B0 /* Dwarf.swift in Sources */,
 				B1BDB99C216549AC00EB54B0 /* Weapon.swift in Sources */,
-				B1BDB9A42167F08D00EB54B0 /* Epee.swift in Sources */,
+				B1BDB9A42167F08D00EB54B0 /* Sword.swift in Sources */,
 				B15F2D83215EA58A00074A70 /* Player.swift in Sources */,
-				B1BDB9AA2167F0B400EB54B0 /* Colosse.swift in Sources */,
-				B1BDB9A82167F0A800EB54B0 /* Sceptre.swift in Sources */,
+				B1BDB9AA2167F0B400EB54B0 /* Colossus.swift in Sources */,
+				B1BDB9A82167F0A800EB54B0 /* Scepter.swift in Sources */,
 				B15F2D7C215C115800074A70 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
