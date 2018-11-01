@@ -9,11 +9,6 @@
 import Foundation
 
 var game = Game()
-var mage = Mage(name: "")
-var nain = Nain(name: "")
-var colosse = Colosse(name: "")
-var combattant = Combattant(name: "")
-var epee = Epee()
 game.CreateGame()
 game.CombatGame()
 
