@@ -20,7 +20,7 @@ class Game {
     
   
     // MARK - function to create players and teams
-    public func CreateGame() -> [Player]{
+    public func CreateGame(){
         for i in 1 ... 2 {
             print("Vous êtes l'équipe \(i) à jouer. Quelle est votre nom d'équipe?")
             myTeam2 = CreateTeam()
@@ -29,7 +29,7 @@ class Game {
             }
             myTeam.append(myTeam2)
         }
-            return myTeam2
+        
        
     }
     
@@ -144,11 +144,11 @@ class Game {
         print("\(indexArray + 1). \(myTeam[indexArray].name) est un \(myTeam[indexArray].type) équipé de \(myTeam[indexArray].weapon.name) provoquant \(myTeam[indexArray].weapon.damage) de dégat et a \(myTeam[indexArray].pointOfLife) points de vie")
         }
         var choice: String? = readLine()
-        if ((choice! == "") || !(Int(choice!)! <= (myTeam.count)))   {
+        if ((choice! == "" || choice == "0") || !(Int(choice!)! <= (myTeam.count)))   {
             repeat{
                 print("Veuillez choisir un de vos joueurs")
                 choice = readLine()
-            }while((choice! == "") || !(Int(choice!)! <= (myTeam.count)))
+            }while((choice! == "" || choice == "0") || !(Int(choice!)! <= (myTeam.count)))
             }
             switch choice {
             case "1": if AskForANoDeadPlayer(myTeam: myTeam,indexPlayer: (Int(choice!)! - 1)) {
