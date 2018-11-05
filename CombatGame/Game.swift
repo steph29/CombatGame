@@ -17,7 +17,7 @@ class Game {
     private var opPlayer = Player(name: "", type: "",  pointOfLife: 0, weapon: Sword()) // use to take a player in the other team
     private var myTeam1: [Player] = [] // first team
     private var myTeam2: [Player] = [] // second team
-    
+    private var indexPlayerForExchange = 0 // variable using for keep in memory the player which is changed of team
   
     // MARK - function to create players and teams
     public func CreateGame(){
@@ -132,11 +132,6 @@ class Game {
                     return myTeam
                 }
  
-    
-    // variable using for keep in memory the player which is changed of team
-    private var indexPlayerForExchange = 0
-   
-    
     //function for displaying in the playground the choice tree of the playing team
     private func DisplayMyTeam(myTeam: [Player], index: Int) -> Player {
         var player = Player(name: "", type: "", pointOfLife: 0, weapon: Sword())
@@ -241,7 +236,7 @@ class Game {
     return player
     }
     
-    // function for the random weapon excahnge in th ecombat
+    // function for the random weapon excahnge in the combat
     private func RandomWeapon(myTeam: [Player], player: Player){
         print("---------LE COFFRE MAGIQUE---------")
         if IsAFighter(player: player) {
