@@ -13,8 +13,8 @@ class Game {
     private var teamNameArray: [String] = []  //Use to identify each team
     private var nameArray: [String] = []   // use to identify each player
     private var myTeam: [[Player]] = []  // contains the both team
-    private var frPlayer = Player(name: "", type: "", pointOfLife: 0, weapon: Sword()) // use to take one player
-    private var opPlayer = Player(name: "", type: "",  pointOfLife: 0, weapon: Sword()) // use to take a player in the other team
+    private var frPlayer = Player(name: "", type: PlayerType.colosse, pointOfLife: 0, weapon: Sword()) // use to take one player
+    private var opPlayer = Player(name: "", type: PlayerType.colosse,  pointOfLife: 0, weapon: Sword()) // use to take a player in the other team
     private var myTeam1: [Player] = [] // first team
     private var myTeam2: [Player] = [] // second team
     private var indexPlayerForExchange = 0 // variable using for keep in memory the player which is changed of team
@@ -95,7 +95,7 @@ class Game {
                                 let combattant = Fighter(name: NamePlayer())
                                 let epee = Sword()
                                 combattant.weapon = epee
-                                combattant.type = "combattant"
+                                combattant.type = PlayerType.combattant
                                 print("Voici \(combattant.name), le combattants à \(combattant.pointOfLife) point de vie et possède une \(epee.name) dont les dommages coûtent \(epee.damage) points")
                                 myTeam.append(combattant)
                                
@@ -103,7 +103,7 @@ class Game {
                                  let mage = Wizard(name: NamePlayer())
                                 let sceptre = Scepter()
                                 mage.weapon = sceptre
-                                mage.type = "mage"
+                                mage.type = PlayerType.mage
                                 print("Voici \(mage.name), le mage à \(mage.pointOfLife) points de vie et a le pouvoir de sauver vos personnages grâce à son \(sceptre.name) qui redonne \(abs(sceptre.damage)) points")
                                 myTeam.append(mage)
                               
@@ -111,7 +111,7 @@ class Game {
                                 let colosse = Colossus(name: NamePlayer())
                                 let lance = Spear()
                                 colosse.weapon = lance
-                                colosse.type = "colosse"
+                                colosse.type = PlayerType.colosse
                                 print("Voici \(colosse.name), le colosse à \(colosse.pointOfLife) points de vie et possède une \(lance.name) dont les dommages coûtent \(lance.damage) points")
                                 myTeam.append(colosse)
                                
@@ -120,7 +120,7 @@ class Game {
                                 let nain = Dwarf(name: NamePlayer())
                                 let hache = Chopped()
                                 nain.weapon = hache
-                                nain.type = "nain"
+                                nain.type = PlayerType.nain
                                 print("Voici \(nain.name), le nain à \(nain.pointOfLife) points de vie et possède une \(hache.name) dont les dommages coûtent \(hache.damage) points")
                                 myTeam.append(nain)
                            
@@ -134,7 +134,7 @@ class Game {
  
     //function for displaying in the playground the choice tree of the playing team
     private func DisplayMyTeam(myTeam: [Player], index: Int) -> Player {
-        var player = Player(name: "", type: "", pointOfLife: 0, weapon: Sword())
+        var player = Player(name: "", type: PlayerType.colosse, pointOfLife: 0, weapon: Sword())
         for indexArray in 0...(myTeam.count - 1){
         print("\(indexArray + 1). \(myTeam[indexArray].name) est un \(myTeam[indexArray].type) équipé de \(myTeam[indexArray].weapon.name) provoquant \(myTeam[indexArray].weapon.damage) de dégat et a \(myTeam[indexArray].pointOfLife) points de vie")
         }
@@ -251,7 +251,7 @@ class Game {
     private func ChooseOppositePlayer(myTeam: [Player], index: Int) -> Player{
         print("---------C'EST VOTRE JOUR DE CHANCE!!---------")
         print("Choisissez parmi les joueurs de l'équipe adversaire et prenez le dans votre équipe:")
-        var choicePlayer = Player(name: "", type: "", pointOfLife: 0, weapon: Sword())
+        var choicePlayer = Player(name: "", type: PlayerType.colosse, pointOfLife: 0, weapon: Sword())
         choicePlayer = DisplayMyTeam(myTeam: myTeam, index: index)
         return choicePlayer
     }
@@ -285,7 +285,7 @@ class Game {
                 // random for take a player at the opposite team
                 if (turnPlayer == randomIntPlayer){
                     print("\(teamNameArray[i])")
-                    var player = Player(name: "", type: "", pointOfLife: 0, weapon: Sword())
+                    var player = Player(name: "", type: PlayerType.colosse, pointOfLife: 0, weapon: Sword())
                     player = ChooseOppositePlayer(myTeam: deadTeam, index: j)
                     myTeam.append(player)
                     deadTeam.remove(at: indexPlayerForExchange)
@@ -316,7 +316,7 @@ class Game {
                 }
                 
                     if frPlayer is Wizard {
-                    var player = Player(name: "", type: "", pointOfLife: 0, weapon: Sword())
+                    var player = Player(name: "", type: PlayerType.colosse, pointOfLife: 0, weapon: Sword())
                     print("Qui voulez-vous soigner?")
                             for indexArray in 0 ... (myTeam.count - 1){
                             print("\(indexArray + 1). \(myTeam[indexArray].name) avec \(myTeam[indexArray].pointOfLife) points de vie")

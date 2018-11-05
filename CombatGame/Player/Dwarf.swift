@@ -11,6 +11,6 @@ import Foundation
 class Dwarf: Player {
  
     init(name: String) {
-        super.init(name: name, type: "nain", pointOfLife: 60, weapon: Chopped())
+        super.init(name: name, type: PlayerType.nain, pointOfLife: 60, weapon: Chopped())
     }
 }

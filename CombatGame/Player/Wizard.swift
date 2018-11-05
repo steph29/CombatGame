@@ -10,6 +10,6 @@ import Foundation
 
 class Wizard: Player {
     init(name: String) {
-        super.init(name: name, type: "mage", pointOfLife: 80, weapon: Scepter())
+        super.init(name: name, type: PlayerType.mage, pointOfLife: 80, weapon: Scepter())
     }
 }

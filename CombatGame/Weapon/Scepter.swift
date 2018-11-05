@@ -10,6 +10,6 @@ import Foundation
 
 class Scepter: Weapon {
     init() {
-        super.init(damage: 10, name: "sceptre")
+        super.init(damage: 10, name: WeaponType.sceptre)
     }
 }

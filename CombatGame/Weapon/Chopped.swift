@@ -11,7 +11,7 @@ import Foundation
 class Chopped: Weapon {
 
     init() {
-       super.init(damage: 15, name: "hache")
+       super.init(damage: 15, name: WeaponType.hache)
     }
     
 }
