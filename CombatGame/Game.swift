@@ -18,6 +18,7 @@ class Game {
     private var myTeam1: [Player] = [] // first team
     private var myTeam2: [Player] = [] // second team
     private var indexPlayerForExchange = 0 // variable using for keep in memory the player which is changed of team
+    private var round = 0 // Determine the numbers of rounds in combat game
   
     // MARK - function to create players and teams
     public func CreateGame(){
@@ -145,33 +146,12 @@ class Game {
                 choice = readLine()
             }while((choice! == "" || choice! == "0") || !(Int(choice!)! <= (myTeam.count)))
             }
-            switch choice {
-            case "1": if AskForANoDeadPlayer(myTeam: myTeam,indexPlayer: (Int(choice!)! - 1)) {
+
+            if AskForANoDeadPlayer(myTeam: myTeam,indexPlayer: (Int(choice!)! - 1)) {
                         repeat{
                             choice = readLine()
-                        }while (choice == "1")
+                        }while ((choice! == "" || choice! == "0") || !(Int(choice!)! <= (myTeam.count)))
                     }
-            case "2":
-                if AskForANoDeadPlayer(myTeam: myTeam, indexPlayer: (Int(choice!)! - 1)) {
-                        repeat{
-                            choice = readLine()
-                        }while (choice == "2")
-                        }
-            case "3":
-                if AskForANoDeadPlayer(myTeam: myTeam, indexPlayer: (Int(choice!)! - 1)) {
-                        repeat{
-                            choice = readLine()
-                        }while (choice == "3")
-                        }
-            case "4":
-                if AskForANoDeadPlayer(myTeam: myTeam, indexPlayer: (Int(choice!)! - 1)) {
-                    repeat{
-                        choice = readLine()
-                    }while (choice == "4")
-                }
-             default:
-                break
-            }
         player = myTeam[(Int(choice!)! - 1)]
         indexPlayerForExchange = Int(choice!)! - 1
         return player
@@ -247,7 +227,7 @@ class Game {
         }
     }
     
-    //MARK - function for RandomPlayer ( BONUS )
+    //MARK - functions for RandomPlayer ( BONUS )
     private func ChooseOppositePlayer(myTeam: [Player], index: Int) -> Player{
         print("---------C'EST VOTRE JOUR DE CHANCE!!---------")
         print("Choisissez parmi les joueurs de l'équipe adversaire et prenez le dans votre équipe:")
@@ -255,18 +235,49 @@ class Game {
         choicePlayer = DisplayMyTeam(myTeam: myTeam, index: index)
         return choicePlayer
     }
-
+    
+    // MARK - function to care player, if wizard is choosing
+    private func WizardCared(myTeam: [Player]) -> Player{
+        var player = Player(name: "", type: PlayerType.colosse, pointOfLife: 0, weapon: Sword())
+        print("Qui voulez-vous soigner?")
+        for indexArray in 0 ... (myTeam.count - 1){
+            print("\(indexArray + 1). \(myTeam[indexArray].name) avec \(myTeam[indexArray].pointOfLife) points de vie")
+        }
+        var choiceInjured: String? = readLine()
+        if ((choiceInjured! == "" || choiceInjured! == "0") || !(Int(choiceInjured!)! <= (myTeam.count))){
+            repeat {
+                print("Choisissez un de vos personnage à guérir: ")
+                choiceInjured = readLine()
+            }while ((choiceInjured! == "" || choiceInjured! == "0") || !(Int(choiceInjured!)! <= (myTeam.count)))
+        }
+        
+        if AskForANoDeadPlayer(myTeam: myTeam, indexPlayer: (Int(choiceInjured!)! - 1)) {
+                repeat{
+                    choiceInjured = readLine()
+                }while AskForANoDeadPlayer(myTeam: myTeam, indexPlayer: (Int(choiceInjured!)! - 1))
+            }
+         player = myTeam[(Int(choiceInjured!)! - 1)]
+        return player
+    }
+    
+    // MARK - function to check if the game is over and print the winner
+    private func CheckGameOver(index: Int, myTeam: [Player]) -> Bool{
+        let gameOver = IsGameOver(myTeam: myTeam)
+        if gameOver == true{
+            print("\(teamNameArray[index]) gagne le jeu !!")
+            print("Résultat: \(teamNameArray[index]) a gagné en \(round) coups")
+        }
+        return gameOver
+    }
+    
     // MARK - function for Combat Game
     public func CombatGame() {
         // Declaration of the methods
         var myTeam: [Player] = []
         var deadTeam: [Player] = []
             var j: Int = 0
-            let randomIntWeapon = Int.random(in: 3..<6)
-            let randomIntPlayer = Int.random(in: 7..<11)
-            var turnPlayer = 0
-            var turnWeapon = 0
-        
+            let randomIntWeapon = Int.random(in: 3..<6) // create a random Int for the weapon exchange and put it in a constant to determine the round it will be play
+            let randomIntPlayer = Int.random(in: 7..<11) // create a random Int for the bonus and put it in a constant to determine the round it will be play
         // start of the repeat game
         repeat{
                for i in 0 ... 1{
@@ -279,23 +290,21 @@ class Game {
                             j = 0
                             deadTeam = myTeam1
                         }
-                turnWeapon += 1
-                turnPlayer += 1
-                
+                round += 1
                 // random for take a player at the opposite team
-                if (turnPlayer == randomIntPlayer){
+                if (round == randomIntPlayer){
                     print("\(teamNameArray[i])")
                     var player = Player(name: "", type: PlayerType.colosse, pointOfLife: 0, weapon: Sword())
                     player = ChooseOppositePlayer(myTeam: deadTeam, index: j)
                     myTeam.append(player)
                     deadTeam.remove(at: indexPlayerForExchange)
-                        if i == 0 {
-                            myTeam1 = myTeam
-                            myTeam2 = deadTeam
-                        }else if i == 1{
-                            myTeam2 = myTeam
-                            myTeam1 = deadTeam
-                        }
+                    if i == 0 {
+                        myTeam1 = myTeam
+                        myTeam2 = deadTeam
+                    }else if i == 1{
+                        myTeam2 = myTeam
+                        myTeam1 = deadTeam
+                    }
                     print("votre équipe est désormais composée de:")
                     for indexArray in 0 ... (myTeam.count - 1){
                         print("\(indexArray + 1). \(myTeam[indexArray].name) avec \(myTeam[indexArray].pointOfLife) points de vie et est équipé de \(myTeam[indexArray].weapon.name)")
@@ -305,74 +314,24 @@ class Game {
                         print("\(indexArray + 1). \(deadTeam[indexArray].name) avec \(deadTeam[indexArray].pointOfLife) points de vie et est équipé de \(deadTeam[indexArray].weapon.name)")
                     }
                 }
-                
                 // fisrt team begin playing
                 print("\(teamNameArray[i]), Choisissez votre joueur: ")
                 frPlayer = DisplayMyTeam(myTeam: myTeam, index: i)
-                
                 // random for exchanging the weapon
-                if (turnWeapon == randomIntWeapon) {
+                if (round == randomIntWeapon) {
                     RandomWeapon(myTeam: myTeam, player: frPlayer)
                 }
-                
-                    if frPlayer is Wizard {
-                    var player = Player(name: "", type: PlayerType.colosse, pointOfLife: 0, weapon: Sword())
-                    print("Qui voulez-vous soigner?")
-                            for indexArray in 0 ... (myTeam.count - 1){
-                            print("\(indexArray + 1). \(myTeam[indexArray].name) avec \(myTeam[indexArray].pointOfLife) points de vie")
-                            }
-                    var choiceInjured: String? = readLine()
-                        if ((choiceInjured! == "" || choiceInjured! == "0") || !(Int(choiceInjured!)! <= (myTeam.count))){
-                            repeat {
-                                print("Choisissez un de vos personnage à guérir: ")
-                                choiceInjured = readLine()
-                            }while ((choiceInjured! == "" || choiceInjured! == "0") || !(Int(choiceInjured!)! <= (myTeam.count)))
-                        }
-                    
-                            switch choiceInjured {
-                            case "1":
-                                if AskForANoDeadPlayer(myTeam: myTeam, indexPlayer: (Int(choiceInjured!)! - 1)) {
-                                repeat{
-                                        choiceInjured = readLine()
-                                    }while (choiceInjured == "1")
-                                }
-                            case "2":
-                                if AskForANoDeadPlayer(myTeam: myTeam, indexPlayer: (Int(choiceInjured!)! - 1)) {
-                                    repeat{
-                                        choiceInjured = readLine()
-                                    }while (choiceInjured == "2")
-                                }
-                            case "3":
-                                if AskForANoDeadPlayer(myTeam: myTeam, indexPlayer: (Int(choiceInjured!)! - 1)) {
-                                    repeat{
-                                        choiceInjured = readLine()
-                                    }while (choiceInjured == "3")
-                                }
-                            case "4":
-                                if AskForANoDeadPlayer(myTeam: myTeam, indexPlayer: (Int(choiceInjured!)! - 1)) {
-                                    repeat{
-                                        choiceInjured = readLine()
-                                    }while (choiceInjured == "4")
-                                }
-                            default:
-                                break
-                            }
-                    player = myTeam[(Int(choiceInjured!)! - 1)]
-                        Resurrect(player: player, care: frPlayer.weapon.damage)
+                if frPlayer is Wizard {
+                    Resurrect(player: WizardCared(myTeam: myTeam), care: frPlayer.weapon.damage)
                 }else{
                     print("Choisissez votre adversaire: ")
                     opPlayer = DisplayMyTeam(myTeam: deadTeam, index: j)
                     opPlayer = Hit(player: opPlayer, weapon: frPlayer.weapon)
-                    
-                    }
-                
+                }
                 // verify if players of the team is still alive or if there is just a wizard
-                        let gameOver = IsGameOver(myTeam: deadTeam)
-                        if gameOver == true{
-                            print("\(teamNameArray[i]) gagne le jeu !!")
-                            print("Résultat: \(teamNameArray[i]) a gagné en \(turnPlayer) coups")
-                            break
-                        }
+                if CheckGameOver(index: i, myTeam: deadTeam){
+                    break
+                }
                    }
              }while !(IsGameOver(myTeam: deadTeam))
         }
