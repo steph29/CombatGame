@@ -11,7 +11,3 @@ import Foundation
 var game = Game()
 game.CreateGame()
 game.CombatGame()
-
-
-
-

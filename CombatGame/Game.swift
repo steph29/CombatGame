@@ -144,11 +144,11 @@ class Game {
         print("\(indexArray + 1). \(myTeam[indexArray].name) est un \(myTeam[indexArray].type) équipé de \(myTeam[indexArray].weapon.name) provoquant \(myTeam[indexArray].weapon.damage) de dégat et a \(myTeam[indexArray].pointOfLife) points de vie")
         }
         var choice: String? = readLine()
-        if ((choice! == "" || choice == "0") || !(Int(choice!)! <= (myTeam.count)))   {
+        if ((choice! == "" || choice! == "0") || !(Int(choice!)! <= (myTeam.count)))   {
             repeat{
                 print("Veuillez choisir un de vos joueurs")
                 choice = readLine()
-            }while((choice! == "" || choice == "0") || !(Int(choice!)! <= (myTeam.count)))
+            }while((choice! == "" || choice! == "0") || !(Int(choice!)! <= (myTeam.count)))
             }
             switch choice {
             case "1": if AskForANoDeadPlayer(myTeam: myTeam,indexPlayer: (Int(choice!)! - 1)) {
@@ -327,11 +327,11 @@ class Game {
                             print("\(indexArray + 1). \(myTeam[indexArray].name) avec \(myTeam[indexArray].pointOfLife) points de vie")
                             }
                     var choiceInjured: String? = readLine()
-                        if ((choiceInjured! == "") || !(Int(choiceInjured!)! <= (myTeam.count))){
+                        if ((choiceInjured! == "" || choiceInjured! == "0") || !(Int(choiceInjured!)! <= (myTeam.count))){
                             repeat {
                                 print("Choisissez un de vos personnage à guérir: ")
                                 choiceInjured = readLine()
-                            }while ((choiceInjured! == "") || !(Int(choiceInjured!)! <= (myTeam.count)))
+                            }while ((choiceInjured! == "" || choiceInjured! == "0") || !(Int(choiceInjured!)! <= (myTeam.count)))
                         }
                     
                             switch choiceInjured {
@@ -374,8 +374,8 @@ class Game {
                 // verify if players of the team is still alive or if there is just a wizard
                         let gameOver = IsGameOver(myTeam: deadTeam)
                         if gameOver == true{
-                            print("\(teamNameArray[j]) gagne le jeu !!")
-                            print("Résultat: \(teamNameArray[j]) a gagné en \(turnPlayer) coups")
+                            print("\(teamNameArray[i]) gagne le jeu !!")
+                            print("Résultat: \(teamNameArray[i]) a gagné en \(turnPlayer) coups")
                             break
                         }
                    }
