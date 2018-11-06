@@ -63,6 +63,7 @@ class Game {
        return teamName!
     }
     
+    // Verify that the input is an Int
     private func IsStringAnInt(string: String) -> Bool{
         var isInt = false
         if Int(string) != nil{
