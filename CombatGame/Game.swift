@@ -30,9 +30,7 @@ class Game {
             }
             myTeam.append(myTeam2)
         }
-        
-       
-    }
+     }
     
     // function to determine the uniqueless of the name of each player
    private func NamePlayerUniqueness() -> String {
@@ -84,12 +82,12 @@ class Game {
                     for indexPlayerArray in 0 ... 3 {
                         print("\(indexPlayerArray + 1). \(playerArray[indexPlayerArray])")
                     }
-                        if var choice = readLine() {
-                            if ((choice == "" || choice == "0") || !(Int(choice)! <= (playerArray.count)))   {
+                    var choice: String? = readLine()
+                            if ((choice! == "" || choice! == "0") || !(Int(choice!)! <= (playerArray.count)))   {
                                 repeat{
                                     print("Veuillez choisir un de vos joueurs")
-                                    choice = readLine()!
-                                }while((choice == "" || choice == "0") || !(Int(choice)! <= (playerArray.count)))
+                                    choice = readLine()
+                                }while((choice! == "" || choice! == "0") || !(Int(choice!)! <= (playerArray.count)))
                             }
                             
                             switch choice {
@@ -113,9 +111,9 @@ class Game {
                                 print("Choisissez bien parmi les personnages proposés !")
                                 }
                             }
+         return myTeam
                         }
-                    return myTeam
-                }
+
  
     //function for displaying in the playground the choice tree of the playing team
     private func DisplayMyTeam(myTeam: [Player], index: Int) -> Player {
@@ -163,35 +161,26 @@ class Game {
     // MARK - function for RandomWeapon
     // function for exchange the weapon with an other one
     private func ExchangeYourWeapon(player: Player) -> Player {
+        var weaponArray = [WeaponType.epee, WeaponType.hache, WeaponType.lance]
+        var weaponDamageArray = [10, 15, 20]
         if !(player is Wizard){
-            print("Avec quelle arme voulez-vous échanger?"
-                + "\n1. La Lance"
-                + "\n2. L'épée"
-                + "\n3. La hache")
+            print("Avec quelle arme voulez-vous échanger?")
+            for indexArray in 0 ... 2{
+                print("\(indexArray + 1). \(weaponArray[indexArray])")
+            }
             var choice: String? = readLine()
-            if !(choice == "1" || choice == "2" || choice == "3") {
+            if ((choice! == "" || choice! == "0") || !(Int(choice!)! <= (weaponArray.count)))   {
                 repeat{
-                    print("Veuillez choisir parmi les personnages proposés !")
-                    choice = readLine()!
-                } while !(choice == "1" || choice == "2" || choice == "3")
+                    print("Veuillez choisir un de vos joueurs")
+                    choice = readLine()
+                }while((choice! == "" || choice! == "0") || !(Int(choice!)! <= (weaponArray.count)))
             }
-            switch choice{
-            case "1":
-                let lance = Spear()
-                player.weapon = lance
-            case "2":
-                let epee = Sword()
-                player.weapon = epee
-            case "3":
-                let hache = Chopped()
-                player.weapon = hache
-            default:
-                break
+                player.weapon.name = weaponArray[Int(choice!)! - 1]
+                player.weapon.damage = weaponDamageArray[Int(choice!)! - 1]
             }
+         return player
         }
-        return player
-    }
-    
+
     // function for improve the capability of the scepter
     private func ImproveYourScepter(player: Player) -> Player {
         if(player is Wizard){
@@ -334,7 +323,6 @@ class Game {
             print("Votre adversaire vient de perdre \(weapon.damage). Il lui reste donc désormais \(player.pointOfLife) de points de vie.")
             if IsDead(player: player){
                 print("Félicitation, vous venez d'éliminer un adversaire!")
-                
             }
         }else if weapon is Sword {
              player.pointOfLife = player.pointOfLife - weapon.damage
