@@ -274,7 +274,7 @@ class Game {
     public func CombatGame() {
         // Declaration of the methods
         var myTeam: [Player] = []
-        var deadTeam: [Player] = []
+        var yourTeam: [Player] = []
             var j: Int = 0
             let randomIntWeapon = Int.random(in: 3..<6) // create a random Int for the weapon exchange and put it in a constant to determine the round it will be play
             let randomIntPlayer = Int.random(in: 7..<11) // create a random Int for the bonus and put it in a constant to determine the round it will be play
@@ -284,34 +284,34 @@ class Game {
                         if i == 0 {
                             myTeam = myTeam1
                             j = 1
-                            deadTeam = myTeam2
+                            yourTeam = myTeam2
                         }else if i == 1{
                             myTeam = myTeam2
                             j = 0
-                            deadTeam = myTeam1
+                            yourTeam = myTeam1
                         }
                 round += 1
                 // random for take a player at the opposite team
                 if (round == randomIntPlayer){
                     print("\(teamNameArray[i])")
                     var player = Player(name: "", type: PlayerType.colosse, pointOfLife: 0, weapon: Sword())
-                    player = ChooseOppositePlayer(myTeam: deadTeam, index: j)
+                    player = ChooseOppositePlayer(myTeam: yourTeam, index: j)
                     myTeam.append(player)
-                    deadTeam.remove(at: indexPlayerForExchange)
+                    yourTeam.remove(at: indexPlayerForExchange)
                     if i == 0 {
                         myTeam1 = myTeam
-                        myTeam2 = deadTeam
+                        myTeam2 = yourTeam
                     }else if i == 1{
                         myTeam2 = myTeam
-                        myTeam1 = deadTeam
+                        myTeam1 = yourTeam
                     }
-                    print("votre équipe est désormais composée de:")
+                    print("\(teamNameArray[i])est désormais composée de:")
                     for indexArray in 0 ... (myTeam.count - 1){
                         print("\(indexArray + 1). \(myTeam[indexArray].name) avec \(myTeam[indexArray].pointOfLife) points de vie et est équipé de \(myTeam[indexArray].weapon.name)")
                     }
-                    print("L'équipe adverse est désormais composée de:")
-                    for indexArray in 0 ... (deadTeam.count - 1){
-                        print("\(indexArray + 1). \(deadTeam[indexArray].name) avec \(deadTeam[indexArray].pointOfLife) points de vie et est équipé de \(deadTeam[indexArray].weapon.name)")
+                    print("\(teamNameArray[j]) est désormais composée de:")
+                    for indexArray in 0 ... (yourTeam.count - 1){
+                        print("\(indexArray + 1). \(yourTeam[indexArray].name) avec \(yourTeam[indexArray].pointOfLife) points de vie et est équipé de \(yourTeam[indexArray].weapon.name)")
                     }
                 }
                 // fisrt team begin playing
@@ -325,15 +325,15 @@ class Game {
                     Resurrect(player: WizardCared(myTeam: myTeam), care: frPlayer.weapon.damage)
                 }else{
                     print("Choisissez votre adversaire: ")
-                    opPlayer = DisplayMyTeam(myTeam: deadTeam, index: j)
+                    opPlayer = DisplayMyTeam(myTeam: yourTeam, index: j)
                     opPlayer = Hit(player: opPlayer, weapon: frPlayer.weapon)
                 }
                 // verify if players of the team is still alive or if there is just a wizard
-                if CheckGameOver(index: i, myTeam: deadTeam){
+                if CheckGameOver(index: i, myTeam: yourTeam){
                     break
                 }
                    }
-             }while !(IsGameOver(myTeam: deadTeam))
+             }while !(IsGameOver(myTeam: yourTeam))
         }
     
     // MARK - function attack or treat
