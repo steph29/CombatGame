@@ -34,8 +34,8 @@ class Game {
        
     }
     
-    // function to determine the uniqueless of the name
-   private func NamePlayer() -> String {
+    // function to determine the uniqueless of the name of each player
+   private func NamePlayerUniqueness() -> String {
         print("Donnez lui un nom")
         var name: String? = readLine()
         var upperName = name?.uppercased()
@@ -50,22 +50,26 @@ class Game {
         return name!
     }
    
+    // function to determine the uniqueless of the name of each team
+    private func TeamNameUniqueness()-> String {
+        var teamName: String? = readLine()
+        var upperTeamName = teamName?.uppercased()
+        if teamNameArray.contains(upperTeamName!) || upperTeamName! == "" {
+            repeat{
+                print("Veuillez en choisir un autre nom d'équipe")
+                teamName = readLine()
+                upperTeamName = teamName!.uppercased()
+            } while (teamNameArray.contains(upperTeamName!) || upperTeamName! == "")
+        }
+        teamNameArray.append(upperTeamName!)
+       return teamName!
+    }
+    
     // function to create team
     private func CreateTeam() -> [Player] {
        //  Name of each team
-                var teamName: String? = readLine()
-                var upperTeamName = teamName?.uppercased()
-                if teamNameArray.contains(upperTeamName!) || upperTeamName! == "" {
-                repeat{
-                    print("Veuillez en choisir un autre nom d'équipe")
-                    teamName = readLine()
-                    upperTeamName = teamName!.uppercased()
-                    } while (teamNameArray.contains(upperTeamName!) || upperTeamName! == "")
-                }
-                teamNameArray.append(upperTeamName!)
-                print("Bienvenue \(teamName!)")
-                var myTeam: [Player] = []
-    
+            print("Bienvenue \(TeamNameUniqueness())")
+            var myTeam: [Player] = []
         //  Name and type for each players
                 for i in 1 ... 3 {
                         if i == 1 {
@@ -90,23 +94,19 @@ class Game {
                             
                             switch choice {
                             case "1":
-                                let combattant = Fighter(name: NamePlayer())
+                                let combattant = Fighter(name: NamePlayerUniqueness())
                                 print("Voici \(combattant.name), le combattants à \(combattant.pointOfLife) point de vie et possède une \(combattant.weapon.name) dont les dommages coûtent \(combattant.weapon.damage) points")
                                 myTeam.append(combattant)
-                               
                             case "2":
-                                let mage = Wizard(name: NamePlayer())
+                                let mage = Wizard(name: NamePlayerUniqueness())
                                 print("Voici \(mage.name), le mage à \(mage.pointOfLife) points de vie et a le pouvoir de sauver vos personnages grâce à son \(mage.weapon.name) qui redonne \(abs(mage.weapon.damage)) points")
                                 myTeam.append(mage)
-                              
-                            case "3":
-                                let colosse = Colossus(name: NamePlayer())
+                           case "3":
+                                let colosse = Colossus(name: NamePlayerUniqueness())
                                 print("Voici \(colosse.name), le colosse à \(colosse.pointOfLife) points de vie et possède une \(colosse.weapon.name) dont les dommages coûtent \(colosse.weapon.damage) points")
                                 myTeam.append(colosse)
-                               
-                                
-                            case "4":
-                                let nain = Dwarf(name: NamePlayer())
+                             case "4":
+                                let nain = Dwarf(name: NamePlayerUniqueness())
                                 print("Voici \(nain.name), le nain à \(nain.pointOfLife) points de vie et possède une \(nain.weapon.name) dont les dommages coûtent \(nain.weapon.damage) points")
                                 myTeam.append(nain)
                             default:
