@@ -34,7 +34,6 @@ class Game {
        
     }
     
-    
     // function to determine the uniqueless of the name
    private func NamePlayer() -> String {
         print("Donnez lui un nom")
@@ -50,8 +49,7 @@ class Game {
         nameArray.append(upperName!)
         return name!
     }
-    
-    
+   
     // function to create team
     private func CreateTeam() -> [Player] {
        //  Name of each team
@@ -77,54 +75,40 @@ class Game {
                         }else{
                             print("Enfin quel est votre troisième personnage?")
                         }
-                        
-                        print("1. Le combattant"
-                            + "\n2. Le mage"
-                            + "\n3. Le colosse"
-                            + "\n4. Le nain")
-                        
+                    
+                    var playerArray = [PlayerType.combattant, PlayerType.mage, PlayerType.colosse, PlayerType.nain]
+                    for indexPlayerArray in 0 ... 3 {
+                        print("\(indexPlayerArray + 1). \(playerArray[indexPlayerArray])")
+                    }
                         if var choice = readLine() {
-                            if !(choice == "1" || choice == "2" || choice == "3" || choice == "4"){
+                            if ((choice == "" || choice == "0") || !(Int(choice)! <= (playerArray.count)))   {
                                 repeat{
-                                print("Veuillez choisir parmi les personnages proposés !")
-                                choice = readLine()!
-                                } while (!(choice == "1" || choice == "2" || choice == "3" || choice == "4"))
+                                    print("Veuillez choisir un de vos joueurs")
+                                    choice = readLine()!
+                                }while((choice == "" || choice == "0") || !(Int(choice)! <= (playerArray.count)))
                             }
                             
                             switch choice {
                             case "1":
                                 let combattant = Fighter(name: NamePlayer())
-                                let epee = Sword()
-                                combattant.weapon = epee
-                                combattant.type = PlayerType.combattant
-                                print("Voici \(combattant.name), le combattants à \(combattant.pointOfLife) point de vie et possède une \(epee.name) dont les dommages coûtent \(epee.damage) points")
+                                print("Voici \(combattant.name), le combattants à \(combattant.pointOfLife) point de vie et possède une \(combattant.weapon.name) dont les dommages coûtent \(combattant.weapon.damage) points")
                                 myTeam.append(combattant)
                                
                             case "2":
-                                 let mage = Wizard(name: NamePlayer())
-                                let sceptre = Scepter()
-                                mage.weapon = sceptre
-                                mage.type = PlayerType.mage
-                                print("Voici \(mage.name), le mage à \(mage.pointOfLife) points de vie et a le pouvoir de sauver vos personnages grâce à son \(sceptre.name) qui redonne \(abs(sceptre.damage)) points")
+                                let mage = Wizard(name: NamePlayer())
+                                print("Voici \(mage.name), le mage à \(mage.pointOfLife) points de vie et a le pouvoir de sauver vos personnages grâce à son \(mage.weapon.name) qui redonne \(abs(mage.weapon.damage)) points")
                                 myTeam.append(mage)
                               
                             case "3":
                                 let colosse = Colossus(name: NamePlayer())
-                                let lance = Spear()
-                                colosse.weapon = lance
-                                colosse.type = PlayerType.colosse
-                                print("Voici \(colosse.name), le colosse à \(colosse.pointOfLife) points de vie et possède une \(lance.name) dont les dommages coûtent \(lance.damage) points")
+                                print("Voici \(colosse.name), le colosse à \(colosse.pointOfLife) points de vie et possède une \(colosse.weapon.name) dont les dommages coûtent \(colosse.weapon.damage) points")
                                 myTeam.append(colosse)
                                
                                 
                             case "4":
                                 let nain = Dwarf(name: NamePlayer())
-                                let hache = Chopped()
-                                nain.weapon = hache
-                                nain.type = PlayerType.nain
-                                print("Voici \(nain.name), le nain à \(nain.pointOfLife) points de vie et possède une \(hache.name) dont les dommages coûtent \(hache.damage) points")
+                                print("Voici \(nain.name), le nain à \(nain.pointOfLife) points de vie et possède une \(nain.weapon.name) dont les dommages coûtent \(nain.weapon.damage) points")
                                 myTeam.append(nain)
-                           
                             default:
                                 print("Choisissez bien parmi les personnages proposés !")
                                 }
@@ -226,16 +210,6 @@ class Game {
             print("\(ImproveYourScepter(player: player).name) a un nouveau sceptre qui soigne de \(player.weapon.damage) points de vie.")
         }
     }
-    
-    //MARK - functions for RandomPlayer ( BONUS )
-    private func ChooseOppositePlayer(myTeam: [Player], index: Int) -> Player{
-        print("---------C'EST VOTRE JOUR DE CHANCE!!---------")
-        print("Choisissez parmi les joueurs de l'équipe adversaire et prenez le dans votre équipe:")
-        var choicePlayer = Player(name: "", type: PlayerType.colosse, pointOfLife: 0, weapon: Sword())
-        choicePlayer = DisplayMyTeam(myTeam: myTeam, index: index)
-        return choicePlayer
-    }
-    
     // MARK - function to care player, if wizard is choosing
     private func WizardCared(myTeam: [Player]) -> Player{
         var player = Player(name: "", type: PlayerType.colosse, pointOfLife: 0, weapon: Sword())
@@ -252,22 +226,34 @@ class Game {
         }
         
         if AskForANoDeadPlayer(myTeam: myTeam, indexPlayer: (Int(choiceInjured!)! - 1)) {
-                repeat{
-                    choiceInjured = readLine()
-                }while AskForANoDeadPlayer(myTeam: myTeam, indexPlayer: (Int(choiceInjured!)! - 1))
-            }
-         player = myTeam[(Int(choiceInjured!)! - 1)]
+            repeat{
+                choiceInjured = readLine()
+            }while AskForANoDeadPlayer(myTeam: myTeam, indexPlayer: (Int(choiceInjured!)! - 1))
+        }
+        player = myTeam[(Int(choiceInjured!)! - 1)]
         return player
     }
     
-    // MARK - function to check if the game is over and print the winner
-    private func CheckGameOver(index: Int, myTeam: [Player]) -> Bool{
-        let gameOver = IsGameOver(myTeam: myTeam)
-        if gameOver == true{
-            print("\(teamNameArray[index]) gagne le jeu !!")
-            print("Résultat: \(teamNameArray[index]) a gagné en \(round) coups")
+    //MARK - functions for RandomPlayer ( BONUS )
+    private func ChooseOppositePlayer(myTeam: [Player], index: Int) -> Player{
+        print("---------C'EST VOTRE JOUR DE CHANCE!!---------")
+        print("Choisissez parmi les joueurs de l'équipe adversaire et prenez le dans votre équipe:")
+        var choicePlayer = Player(name: "", type: PlayerType.colosse, pointOfLife: 0, weapon: Sword())
+        choicePlayer = DisplayMyTeam(myTeam: myTeam, index: index)
+        return choicePlayer
+    }
+    
+    private func RandomPlayer(myTeam: [Player], index: Int) -> Player{
+        var player = Player(name: "", type: PlayerType.colosse, pointOfLife: 0, weapon: Sword())
+        player = ChooseOppositePlayer(myTeam: myTeam, index: index)
+        return player
+    }
+    
+    private func PrintNewTeam(myTeam:[Player], index: Int){
+        print("\(teamNameArray[index]) est désormais composée de:")
+        for indexArray in 0 ... (myTeam.count - 1){
+            print("\(indexArray + 1). \(myTeam[indexArray].name) avec \(myTeam[indexArray].pointOfLife) points de vie et est équipé de \(myTeam[indexArray].weapon.name).")
         }
-        return gameOver
     }
     
     // MARK - function for Combat Game
@@ -275,7 +261,7 @@ class Game {
         // Declaration of the methods
         var myTeam: [Player] = []
         var yourTeam: [Player] = []
-            var j: Int = 0
+        var j: Int = 0 // index of the team in the array of arrays myTeam: [[Player]] (declared line 15)
             let randomIntWeapon = Int.random(in: 3..<6) // create a random Int for the weapon exchange and put it in a constant to determine the round it will be play
             let randomIntPlayer = Int.random(in: 7..<11) // create a random Int for the bonus and put it in a constant to determine the round it will be play
         // start of the repeat game
@@ -294,9 +280,7 @@ class Game {
                 // random for take a player at the opposite team
                 if (round == randomIntPlayer){
                     print("\(teamNameArray[i])")
-                    var player = Player(name: "", type: PlayerType.colosse, pointOfLife: 0, weapon: Sword())
-                    player = ChooseOppositePlayer(myTeam: yourTeam, index: j)
-                    myTeam.append(player)
+                    myTeam.append(RandomPlayer(myTeam: yourTeam, index: j))
                     yourTeam.remove(at: indexPlayerForExchange)
                     if i == 0 {
                         myTeam1 = myTeam
@@ -305,14 +289,8 @@ class Game {
                         myTeam2 = myTeam
                         myTeam1 = yourTeam
                     }
-                    print("\(teamNameArray[i])est désormais composée de:")
-                    for indexArray in 0 ... (myTeam.count - 1){
-                        print("\(indexArray + 1). \(myTeam[indexArray].name) avec \(myTeam[indexArray].pointOfLife) points de vie et est équipé de \(myTeam[indexArray].weapon.name)")
-                    }
-                    print("\(teamNameArray[j]) est désormais composée de:")
-                    for indexArray in 0 ... (yourTeam.count - 1){
-                        print("\(indexArray + 1). \(yourTeam[indexArray].name) avec \(yourTeam[indexArray].pointOfLife) points de vie et est équipé de \(yourTeam[indexArray].weapon.name)")
-                    }
+                    PrintNewTeam(myTeam: myTeam, index: i)
+                    PrintNewTeam(myTeam: yourTeam, index: j)
                 }
                 // fisrt team begin playing
                 print("\(teamNameArray[i]), Choisissez votre joueur: ")
@@ -418,6 +396,17 @@ class Game {
         }
         return isGameOver
     }
+    
+    // MARK - function to check if the game is over and print the winner
+    private func CheckGameOver(index: Int, myTeam: [Player]) -> Bool{
+        let gameOver = IsGameOver(myTeam: myTeam)
+        if gameOver == true{
+            print("\(teamNameArray[index]) gagne le jeu !!")
+            print("Résultat: \(teamNameArray[index]) a gagné en \(round) coups")
+        }
+        return gameOver
+    }
+    
 }
 
 
