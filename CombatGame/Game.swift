@@ -63,6 +63,14 @@ class Game {
        return teamName!
     }
     
+    private func IsStringAnInt(string: String) -> Bool{
+        var isInt = false
+        if Int(string) != nil{
+            isInt = true
+        }
+        return isInt
+    }
+
     // function to create team
     private func CreateTeam() -> [Player] {
        //  Name of each team
@@ -83,11 +91,11 @@ class Game {
                         print("\(indexPlayerArray + 1). \(playerArray[indexPlayerArray])")
                     }
                     var choice: String? = readLine()
-                            if ((choice! == "" || choice! == "0") || !(Int(choice!)! <= (playerArray.count)))   {
+                            if (!IsStringAnInt(string: choice!) || choice! == "" || choice! == "0" || !(Int(choice!)! <= (playerArray.count)))   {
                                 repeat{
                                     print("Veuillez choisir un de vos joueurs")
                                     choice = readLine()
-                                }while((choice! == "" || choice! == "0") || !(Int(choice!)! <= (playerArray.count)))
+                                }while(!IsStringAnInt(string: choice!) || (choice! == "" || choice! == "0") || !(Int(choice!)! <= (playerArray.count)))
                             }
                             
                             switch choice {
@@ -122,11 +130,11 @@ class Game {
         print("\(indexArray + 1). \(myTeam[indexArray].name) est un \(myTeam[indexArray].type) équipé de \(myTeam[indexArray].weapon.name) provoquant \(myTeam[indexArray].weapon.damage) de dégat et a \(myTeam[indexArray].pointOfLife) points de vie")
         }
         var choice: String? = readLine()
-        if ((choice! == "" || choice! == "0") || !(Int(choice!)! <= (myTeam.count)))   {
+        if (!IsStringAnInt(string: choice!) || (choice! == "" || choice! == "0") || !(Int(choice!)! <= (myTeam.count)))   {
             repeat{
                 print("Veuillez choisir un de vos joueurs")
                 choice = readLine()
-            }while((choice! == "" || choice! == "0") || !(Int(choice!)! <= (myTeam.count)))
+            }while(!IsStringAnInt(string: choice!) || (choice! == "" || choice! == "0") || !(Int(choice!)! <= (myTeam.count)))
             }
 
             if AskForANoDeadPlayer(myTeam: myTeam,indexPlayer: (Int(choice!)! - 1)) {
@@ -169,11 +177,11 @@ class Game {
                 print("\(indexArray + 1). \(weaponArray[indexArray])")
             }
             var choice: String? = readLine()
-            if ((choice! == "" || choice! == "0") || !(Int(choice!)! <= (weaponArray.count)))   {
+            if (!IsStringAnInt(string: choice!) || (choice! == "" || choice! == "0") || !(Int(choice!)! <= (weaponArray.count)))   {
                 repeat{
                     print("Veuillez choisir un de vos joueurs")
                     choice = readLine()
-                }while((choice! == "" || choice! == "0") || !(Int(choice!)! <= (weaponArray.count)))
+                }while(!IsStringAnInt(string: choice!) || (choice! == "" || choice! == "0") || !(Int(choice!)! <= (weaponArray.count)))
             }
                 player.weapon.name = weaponArray[Int(choice!)! - 1]
                 player.weapon.damage = weaponDamageArray[Int(choice!)! - 1]
@@ -207,11 +215,11 @@ class Game {
             print("\(indexArray + 1). \(myTeam[indexArray].name) avec \(myTeam[indexArray].pointOfLife) points de vie")
         }
         var choiceInjured: String? = readLine()
-        if ((choiceInjured! == "" || choiceInjured! == "0") || !(Int(choiceInjured!)! <= (myTeam.count))){
+        if (!IsStringAnInt(string: choiceInjured!) || (choiceInjured! == "" || choiceInjured! == "0") || !(Int(choiceInjured!)! <= (myTeam.count))){
             repeat {
                 print("Choisissez un de vos personnage à guérir: ")
                 choiceInjured = readLine()
-            }while ((choiceInjured! == "" || choiceInjured! == "0") || !(Int(choiceInjured!)! <= (myTeam.count)))
+            }while (!IsStringAnInt(string: choiceInjured!) || (choiceInjured! == "" || choiceInjured! == "0") || !(Int(choiceInjured!)! <= (myTeam.count)))
         }
         
         if AskForANoDeadPlayer(myTeam: myTeam, indexPlayer: (Int(choiceInjured!)! - 1)) {
