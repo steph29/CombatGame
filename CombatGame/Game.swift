@@ -300,11 +300,13 @@ class Game {
                 frPlayer = DisplayMyTeam(myTeam: teamsArray[0], index: i)
                 DisplayRandomWeapon(round: round, myTeam: teamsArray[0], player: frPlayer)
                 if frPlayer is Wizard {
-                  Resurrect(player: WizardCared(myTeam: teamsArray[0]), care: frPlayer.weapon.damage)
+                  let mage = Wizard(name: frPlayer.name)
+                    mage.Resurrect(player: WizardCared(myTeam: teamsArray[0]), care: frPlayer.weapon.damage)
                 }else{
                     print("Choisissez votre adversaire: ")
                     opPlayer = DisplayMyTeam(myTeam: teamsArray[1], index: j)
-                    opPlayer = Hit(player: opPlayer, weapon: frPlayer.weapon)
+                    opPlayer = opPlayer.Hit(player: opPlayer, weapon: frPlayer.weapon)
+                    
                 }
                 if CheckGameOver(index: i, myTeam: teamsArray[1]){
                     break
@@ -314,23 +316,10 @@ class Game {
         }
     
     // MARK - function attack or treat
-    // function to be treat by the wizard
-     public func Resurrect(player: Player, care: Int) {
-        player.pointOfLife = player.pointOfLife + care
-        print ("Vous venez de recupérer \(care). Vous avez désormais \(player.pointOfLife) de points de vie.")
-    }
-    // function for put damage to the opponent
-    private func Hit(player: Player, weapon: Weapon) -> Player {
-        player.pointOfLife = player.pointOfLife - weapon.damage
-        print("Votre adversaire vient de perdre \(weapon.damage). Il lui reste donc désormais \(player.pointOfLife) de points de vie.")
-        if IsDead(player: player){
-            print("Félicitation, vous venez d'éliminer un adversaire!")
-        }
-        return player
-    }
+    
     
     // verify if player is dead
-    private func IsDead(player: Player) -> Bool  {
+    public func IsDead(player: Player) -> Bool  {
         var isDead = false
         if player.pointOfLife <= 0 {
             isDead = true
