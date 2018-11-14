@@ -13,10 +13,10 @@ class Game {
     private var teamNameArray: [String] = []  //Use to identify each team
     private var nameArray: [String] = []   // use to identify each player
     private var myTeam: [[Player]] = []  // contains the both team
-    private var frPlayer = Player(name: "", type: PlayerType.colosse, pointOfLife: 0, weapon: Sword()) // use to take one player
-    private var opPlayer = Player(name: "", type: PlayerType.colosse,  pointOfLife: 0, weapon: Sword()) // use to take a player in the other team
-    private var myTeam1: [Player] = [] // first team
-    private var myTeam2: [Player] = [] // second team
+    private var friendlyPlayer = Player(name: "", type: PlayerType.colosse, pointOfLife: 0, weapon: Sword()) // use to take one player
+    private var opponentPlayer = Player(name: "", type: PlayerType.colosse,  pointOfLife: 0, weapon: Sword()) // use to take a player in the other team
+    private var firstTeam: [Player] = [] // first team
+    private var secondTeam: [Player] = [] // second team
     private var indexPlayerForExchange = 0 // variable using for keep in memory the player which is changed of team
     private var round = 0 // Determine the numbers of rounds in combat game
     private let randomIntWeapon = Int.random(in: 1..<3) // create a random Int for the weapon exchange and put it in a constant to determine the round it will be play
@@ -26,11 +26,11 @@ class Game {
     public func CreateGame(){
         for i in 1 ... 2 {
             print("Vous êtes l'équipe \(i) à jouer. Quelle est votre nom d'équipe?")
-            myTeam2 = CreateTeam()
+            secondTeam = CreateTeam()
             if i == 1 {
-                myTeam1 = myTeam2
+                firstTeam = secondTeam
             }
-            myTeam.append(myTeam2)
+            myTeam.append(secondTeam)
         }
      }
     
@@ -254,20 +254,20 @@ class Game {
     // function displaying random player switch
     private func DisplayRandomPlayer(i: Int, j: Int){
         if i == 0 {
-            teamsArray = [myTeam1, myTeam2]
+            teamsArray = [firstTeam, secondTeam]
         }else if i == 1{
-            teamsArray = [myTeam2, myTeam1]
+            teamsArray = [secondTeam, firstTeam]
         }
         if (round == randomIntPlayer){
             print("\(teamNameArray[i])")
             teamsArray[0].append(RandomPlayer(myTeam: teamsArray[1], index: j))
             teamsArray[1].remove(at: indexPlayerForExchange)
             if i == 0{
-                myTeam1 = teamsArray[0]
-                myTeam2 = teamsArray[1]
+                firstTeam = teamsArray[0]
+                secondTeam = teamsArray[1]
             }else if i == 1{
-                myTeam2 = teamsArray[0]
-                myTeam1 = teamsArray[1]
+                secondTeam = teamsArray[0]
+                firstTeam = teamsArray[1]
             }
             PrintNewTeam(myTeam: teamsArray[0], index: i)
             PrintNewTeam(myTeam: teamsArray[1], index: j)
@@ -288,24 +288,24 @@ class Game {
         repeat{
                for i in 0 ... 1{
                         if i == 0 {
-                            teamsArray = [myTeam1, myTeam2]
+                            teamsArray = [firstTeam, secondTeam]
                             j = 1
                         }else if i == 1{
-                            teamsArray = [myTeam2, myTeam1]
+                            teamsArray = [secondTeam, firstTeam]
                             j = 0
                         }
                 round += 1
                 DisplayRandomPlayer(i: i, j: j)
                 print("\(teamNameArray[i]), Choisissez votre joueur: ")
-                frPlayer = DisplayMyTeam(myTeam: teamsArray[0], index: i)
-                DisplayRandomWeapon(round: round, myTeam: teamsArray[0], player: frPlayer)
-                if frPlayer is Wizard {
-                  let mage = Wizard(name: frPlayer.name)
-                    mage.Resurrect(player: WizardCared(myTeam: teamsArray[0]), care: frPlayer.weapon.damage)
+                friendlyPlayer = DisplayMyTeam(myTeam: teamsArray[0], index: i)
+                DisplayRandomWeapon(round: round, myTeam: teamsArray[0], player: friendlyPlayer)
+                if friendlyPlayer is Wizard {
+                  let mage = Wizard(name: friendlyPlayer.name)
+                    mage.Resurrect(player: WizardCared(myTeam: teamsArray[0]), care: friendlyPlayer.weapon.damage)
                 }else{
                     print("Choisissez votre adversaire: ")
-                    opPlayer = DisplayMyTeam(myTeam: teamsArray[1], index: j)
-                    opPlayer = opPlayer.Hit(player: opPlayer, weapon: frPlayer.weapon)
+                    opponentPlayer = DisplayMyTeam(myTeam: teamsArray[1], index: j)
+                    opponentPlayer = opponentPlayer.Hit(player: opponentPlayer, weapon: friendlyPlayer.weapon)
                     
                 }
                 if CheckGameOver(index: i, myTeam: teamsArray[1]){
