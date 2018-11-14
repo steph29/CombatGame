@@ -11,5 +11,6 @@ import Foundation
 class Wizard: Player {
     init(name: String) {
         super.init(name: name, type: PlayerType.mage, pointOfLife: 80, weapon: Scepter())
-    }
+}
+    
 }

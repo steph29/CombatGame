@@ -24,4 +24,6 @@ class Player {
         self.pointOfLife = pointOfLife
         self.weapon = weapon
      }
+    
+   
  }
