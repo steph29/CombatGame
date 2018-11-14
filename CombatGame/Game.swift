@@ -32,24 +32,24 @@ class Game {
             }
             myTeam.append(secondTeam)
         }
-     }
+    }
     
     // function to determine the uniqueless of the name of each player
-   private func NamePlayerUniqueness() -> String {
-    print("Donnez lui un nom")
-    var name: String? = readLine()
-    var upperName = name?.uppercased()
-    if nameArray.contains(upperName!) || upperName! == "" {
-        repeat{
-            print("Veuillez en donner un autre nom")
-            name = readLine()
-            upperName = name!.uppercased()
-        } while (nameArray.contains(upperName!) || upperName! == "")
+    private func NamePlayerUniqueness() -> String {
+        print("Donnez lui un nom")
+        var name: String? = readLine()
+        var upperName = name?.uppercased()
+        if nameArray.contains(upperName!) || upperName! == "" {
+            repeat{
+                print("Veuillez en donner un autre nom")
+                name = readLine()
+                upperName = name!.uppercased()
+            } while (nameArray.contains(upperName!) || upperName! == "")
+        }
+        nameArray.append(upperName!)
+        return name!
     }
-    nameArray.append(upperName!)
-    return name!
-    }
-   
+    
     // function to determine the uniqueless of the name of each team
     private func TeamNameUniqueness()-> String {
         var teamName: String? = readLine()
@@ -101,7 +101,7 @@ class Game {
         }
         return playerArray
     }
-
+    
     // function to create team
     private func CreateTeam() -> [Player] {
         print("Bienvenue \(TeamNameUniqueness())")
@@ -129,9 +129,9 @@ class Game {
             }
         }
         return myTeam
-                        }
-
- 
+    }
+    
+    
     //function for displaying in the playground the choice tree of the playing team
     private func DisplayMyTeam(myTeam: [Player], index: Int) -> Player {
         var player = Player(name: "", type: PlayerType.colosse, pointOfLife: 0, weapon: Sword())
@@ -183,8 +183,8 @@ class Game {
             player.weapon.damage = weaponDamageArray[Int(choice)! - 1]
         }
         return player
-        }
-
+    }
+    
     // function for improve the capability of the scepter
     private func ImproveYourScepter(player: Player) -> Player {
         if(player is Wizard){
@@ -286,21 +286,21 @@ class Game {
     public func CombatGame() {
         var j: Int = 0 // index of the team in the array of arrays myTeam: [[Player]] (declared line 15)
         repeat{
-               for i in 0 ... 1{
-                        if i == 0 {
-                            teamsArray = [firstTeam, secondTeam]
-                            j = 1
-                        }else if i == 1{
-                            teamsArray = [secondTeam, firstTeam]
-                            j = 0
-                        }
+            for i in 0 ... 1{
+                if i == 0 {
+                    teamsArray = [firstTeam, secondTeam]
+                    j = 1
+                }else if i == 1{
+                    teamsArray = [secondTeam, firstTeam]
+                    j = 0
+                }
                 round += 1
                 DisplayRandomPlayer(i: i, j: j)
                 print("\(teamNameArray[i]), Choisissez votre joueur: ")
                 friendlyPlayer = DisplayMyTeam(myTeam: teamsArray[0], index: i)
                 DisplayRandomWeapon(round: round, myTeam: teamsArray[0], player: friendlyPlayer)
                 if friendlyPlayer is Wizard {
-                  let mage = Wizard(name: friendlyPlayer.name)
+                    let mage = Wizard(name: friendlyPlayer.name)
                     mage.Resurrect(player: WizardCared(myTeam: teamsArray[0]), care: friendlyPlayer.weapon.damage)
                 }else{
                     print("Choisissez votre adversaire: ")
@@ -311,9 +311,9 @@ class Game {
                 if CheckGameOver(index: i, myTeam: teamsArray[1]){
                     break
                 }
-                   }
-             }while !(IsGameOver(myTeam: teamsArray[1]))
-        }
+            }
+        }while !(IsGameOver(myTeam: teamsArray[1]))
+    }
     
     // MARK - function attack or treat
     
@@ -341,11 +341,11 @@ class Game {
     }
     
     // function to group dead player of one team
-   private func AreYouADeadFighter(myTeam: [Player]) -> [Player] {
+    private func AreYouADeadFighter(myTeam: [Player]) -> [Player] {
         var deadFighter: [Player] = []
         for i in 0 ... (AreYouFighter(myTeam: myTeam).count - 1){
-        if IsDead(player: AreYouFighter(myTeam: myTeam)[i]) {
-            deadFighter.append(myTeam[i])
+            if IsDead(player: AreYouFighter(myTeam: myTeam)[i]) {
+                deadFighter.append(myTeam[i])
             }
         }
         return deadFighter

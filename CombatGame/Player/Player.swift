@@ -13,17 +13,17 @@ enum PlayerType {
 }
 // MARK - Creation of Player with the different parameters
 class Player {
-   public var name: String // name of the player
-   public var type: PlayerType // type of the player
-   public var pointOfLife: Int // points of life of the player
-   public var weapon: Weapon // weapon using by the player
+    public var name: String // name of the player
+    public var type: PlayerType // type of the player
+    public var pointOfLife: Int // points of life of the player
+    public var weapon: Weapon // weapon using by the player
     
     init(name: String, type: PlayerType, pointOfLife: Int, weapon: Weapon){
         self.name = name
         self.type = type
         self.pointOfLife = pointOfLife
         self.weapon = weapon
-     }
+    }
     
     // function for put damage to the opponent
     public func Hit(player: Player, weapon: Weapon) -> Player {
@@ -35,4 +35,4 @@ class Player {
         }
         return player
     }
- }
+}

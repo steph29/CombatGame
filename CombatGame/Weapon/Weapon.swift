@@ -15,8 +15,8 @@ enum WeaponType {
 class Weapon {
     public var damage: Int // effect of the weapons
     public var name: WeaponType // name of the weapon
-  
-   init(damage: Int, name: WeaponType) {
+    
+    init(damage: Int, name: WeaponType) {
         self.damage = damage
         self.name = name
     }

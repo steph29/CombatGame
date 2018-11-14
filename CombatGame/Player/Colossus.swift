@@ -9,8 +9,8 @@
 import Foundation
 
 class Colossus: Player {
-  init(name: String) {
-    super.init(name: name, type: PlayerType.colosse, pointOfLife: 120, weapon: Spear())
+    init(name: String) {
+        super.init(name: name, type: PlayerType.colosse, pointOfLife: 120, weapon: Spear())
         
     }
 }
