@@ -159,8 +159,6 @@ class Game {
         return isDead
     }
     
-    
-    
     // MARK - function for RandomWeapon
     // function for exchange the weapon with an other one
     private func ExchangeYourWeapon(player: Player) -> Player {
@@ -177,8 +175,6 @@ class Game {
         }
         return player
     }
-    
-    
     
     // function for the random weapon excahnge in the combat
     private func RandomWeapon(player: Player){
@@ -304,12 +300,9 @@ class Game {
     
     // MARK - function attack or treat
     
-    
-    
-    
     // MARK - Condition of Game Over
     // function to group warrior of one team
-    private func IsAFighter(myTeam: [Player]) -> [Player]{
+    private func FighterArray(myTeam: [Player]) -> [Player]{
         var fighterArray: [Player] = []
         for i in 0 ... (myTeam.count - 1) {
             if (myTeam[i] is Colossus || myTeam[i] is Fighter || myTeam[i] is Dwarf) {
@@ -320,10 +313,10 @@ class Game {
     }
     
     // function to group dead player of one team
-    private func IsAADeadFighter(myTeam: [Player]) -> [Player] {
+    private func DeadFighterArray(myTeam: [Player]) -> [Player] {
         var deadFighter: [Player] = []
-        for i in 0 ... (IsAFighter(myTeam: myTeam).count - 1){
-            if myTeam[i].IsDead(player: IsAFighter(myTeam: myTeam)[i]) {
+        for i in 0 ... (FighterArray(myTeam: myTeam).count - 1){
+            if myTeam[i].IsDead(player: FighterArray(myTeam: myTeam)[i]) {
                 deadFighter.append(myTeam[i])
             }
         }
@@ -333,7 +326,7 @@ class Game {
     // verify if all warrior of one team are dead
     private func AllFighterDead(myTeam: [Player]) -> Bool{
         var allDead = false
-        if IsAFighter(myTeam: myTeam).count == IsAADeadFighter(myTeam: myTeam).count{
+        if FighterArray(myTeam: myTeam).count == DeadFighterArray(myTeam: myTeam).count{
             allDead = true
         }
         return allDead
