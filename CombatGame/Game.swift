@@ -152,21 +152,14 @@ class Game {
     // function asking if the player is still alive or not
     private func AskForANoDeadPlayer(myTeam: [Player], indexPlayer: Int) -> Bool {
         var isDead = false
-        if IsDead(player: myTeam[indexPlayer]){
+        if myTeam[indexPlayer].IsDead(player: myTeam[indexPlayer]){
             print("Ce personnage est décédé, vous devez en choisir un autre ")
             isDead = true
         }
         return isDead
     }
     
-    // function asking for the type of the player: warrior OR magus
-    private func IsAFighter(player: Player) -> Bool{
-        var isAFighter = false
-        if !(player is Wizard){
-            isAFighter = true
-        }
-        return isAFighter
-    }
+    
     
     // MARK - function for RandomWeapon
     // function for exchange the weapon with an other one
@@ -185,29 +178,23 @@ class Game {
         return player
     }
     
-    // function for improve the capability of the scepter
-    private func ImproveYourScepter(player: Player) -> Player {
-        if(player is Wizard){
-            player.weapon.damage = 20
-        }
-        return player
-    }
+    
     
     // function for the random weapon excahnge in the combat
-    private func RandomWeapon(myTeam: [Player], player: Player){
+    private func RandomWeapon(player: Player){
         print("---------LE COFFRE MAGIQUE---------")
-        if IsAFighter(player: player) {
+        if player.IsAFighter(player: player) {
             print("\(ExchangeYourWeapon(player: player).name) est désormais équipé de \(player.weapon.name)")
         }else {
             
-            print("\(ImproveYourScepter(player: player).name) a un nouveau sceptre qui soigne de \(player.weapon.damage) points de vie.")
+            print("\(player.ImproveYourScepter(player: player).name) a un nouveau sceptre qui soigne de \(player.weapon.damage) points de vie.")
         }
     }
     
     // functions displaying random weapon
-    private func DisplayRandomWeapon(round: Int, myTeam: [Player], player: Player){
+    private func DisplayRandomWeapon(round: Int, player: Player){
         if (round == randomIntWeapon) {
-            RandomWeapon(myTeam: myTeam, player: player)
+            RandomWeapon(player: player)
         }
     }
     
@@ -298,7 +285,7 @@ class Game {
                 DisplayRandomPlayer(i: i, j: j)
                 print("\(teamNameArray[i]), Choisissez votre joueur: ")
                 friendlyPlayer = DisplayMyTeam(myTeam: teamsArray[0], index: i)
-                DisplayRandomWeapon(round: round, myTeam: teamsArray[0], player: friendlyPlayer)
+                DisplayRandomWeapon(round: round, player: friendlyPlayer)
                 if friendlyPlayer is Wizard {
                     let mage = Wizard(name: friendlyPlayer.name)
                     mage.Resurrect(player: WizardCared(myTeam: teamsArray[0]), care: friendlyPlayer.weapon.damage)
@@ -318,19 +305,11 @@ class Game {
     // MARK - function attack or treat
     
     
-    // verify if player is dead
-    public func IsDead(player: Player) -> Bool  {
-        var isDead = false
-        if player.pointOfLife <= 0 {
-            isDead = true
-            player.pointOfLife = 0
-        }
-        return isDead
-    }
+    
     
     // MARK - Condition of Game Over
     // function to group warrior of one team
-    private func AreYouFighter(myTeam: [Player]) -> [Player]{
+    private func IsAFighter(myTeam: [Player]) -> [Player]{
         var fighterArray: [Player] = []
         for i in 0 ... (myTeam.count - 1) {
             if (myTeam[i] is Colossus || myTeam[i] is Fighter || myTeam[i] is Dwarf) {
@@ -341,10 +320,10 @@ class Game {
     }
     
     // function to group dead player of one team
-    private func AreYouADeadFighter(myTeam: [Player]) -> [Player] {
+    private func IsAADeadFighter(myTeam: [Player]) -> [Player] {
         var deadFighter: [Player] = []
-        for i in 0 ... (AreYouFighter(myTeam: myTeam).count - 1){
-            if IsDead(player: AreYouFighter(myTeam: myTeam)[i]) {
+        for i in 0 ... (IsAFighter(myTeam: myTeam).count - 1){
+            if myTeam[i].IsDead(player: IsAFighter(myTeam: myTeam)[i]) {
                 deadFighter.append(myTeam[i])
             }
         }
@@ -354,7 +333,7 @@ class Game {
     // verify if all warrior of one team are dead
     private func AllFighterDead(myTeam: [Player]) -> Bool{
         var allDead = false
-        if AreYouFighter(myTeam: myTeam).count == AreYouADeadFighter(myTeam: myTeam).count{
+        if IsAFighter(myTeam: myTeam).count == IsAADeadFighter(myTeam: myTeam).count{
             allDead = true
         }
         return allDead

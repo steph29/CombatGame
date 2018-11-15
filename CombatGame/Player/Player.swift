@@ -25,13 +25,39 @@ class Player {
         self.weapon = weapon
     }
     
+    // verify if player is dead
+    public func IsDead(player: Player) -> Bool  {
+        var isDead = false
+        if player.pointOfLife <= 0 {
+            isDead = true
+            player.pointOfLife = 0
+        }
+        return isDead
+    }
+    
     // function for put damage to the opponent
     public func Hit(player: Player, weapon: Weapon) -> Player {
-        let game = Game()
         player.pointOfLife = player.pointOfLife - weapon.damage
         print("Votre adversaire vient de perdre \(weapon.damage). Il lui reste donc désormais \(player.pointOfLife) de points de vie.")
-        if game.IsDead(player: player){
+        if IsDead(player: player){
             print("Félicitation, vous venez d'éliminer un adversaire!")
+        }
+        return player
+    }
+    
+    // function asking for the type of the player: warrior OR magus
+    public func IsAFighter(player: Player) -> Bool{
+        var isAFighter = false
+        if !(player is Wizard){
+            isAFighter = true
+        }
+        return isAFighter
+    }
+    
+    // function for improve the capability of the scepter
+    public func ImproveYourScepter(player: Player) -> Player {
+        if(player is Wizard){
+            player.weapon.damage = 20
         }
         return player
     }
